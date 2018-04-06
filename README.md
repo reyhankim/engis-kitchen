@@ -1,3 +1,4 @@
+
 # engis-kitchen
 Tugas Besar Daspro 2018 <br>
 
@@ -31,18 +32,21 @@ procedure useInventori(var currentSimulasi: main.data);
 ```
 <br>
 Prosedur ini akan menggunakan ruang inventori untuk menyimpan bahan.
+
 #### freeInventori
 ```pascal
 procedure freeInventori(var currentSimulasi: main.data); 
 ```
 <br>
 Prosedur ini akan membebaskan/mengosongkan ruang inventori jika bahan kadaluarsa/terjual/sudah diolah menjadi resep dan dijual.
+
 #### lihatInventori
 ```pascal
 procedure lihatInventori(arrInvMentah: array of main.isi_inventori; arrInvOlahan: array of main.isi_inventori);
 ``` 
 <br>
 Prosedur ini akan membaca seluruh isi dari array bertipe isi_inventori dan menampilkannya menjadi detail bahan-bahan yang disimpan dalam inventori.
+
 #### upgradeInventori
 ```pascal
 procedure upgradeInventori(var currentSimulasi : main.data);
@@ -77,6 +81,7 @@ procedure beliBahan(var arrInvMentah : array of main.isi_inventori; arrBahanMent
 <br>
 Note: minta masukan bahan yang mau dibeli di dalam prosedur. <br>
 beliBahan digunakan untuk membeli bahan mentah dari supermarket. Butuh energi dan uang untuk melakukan beliBahan. Bahan disimpan dalam inventori. Jumlah bahan dalam inventori harus diubah. Jangan lupa untuk melakukan validasi pada setiap aspek (uang tidak mencukupi, inventori tidak mencukupi, dsb.). Jika bahan gagal dibeli, tampilkan "Pembelian bahan gagal, silakan coba lagi."
+
 #### olahBahan
 ```pascal
 procedure olahBahan(var arrInvOlahan : array of main.isi_inventori; arrBahanOlahan : array of main.bahan_olahan);
@@ -85,6 +90,7 @@ procedure olahBahan(var arrInvOlahan : array of main.isi_inventori; arrBahanOlah
 Note: minta masukan bahan olahan yang ingin dibuat di dalam prosedur dan jangan lupa melakukan validasi terhadap jumlah bahan serta ketersediaan data bahan olahan yang diinput pada arrBahanOlahan yang di-load dari file eksternal. Langsung keluar dari prosedur jika bahan tidak mencukupi dan tampilkan "Pengolahan gagal. Silakan coba lagi.". <br>
 olahBahan digunakan untuk mengolah bahan mentah menjadi bahan olahan, lalu bahan tersebut disimpan ke dalam inventori. Butuh energi. Bahan yang
 digunakan harus dikurangi jumlahnya sebanyak 1.
+
 #### jualResep
 ```pascal
 procedure jualResep (var arrInvOlahan : array of main.isi_inventori; var arrInvMentah : array of main.isi_inventori; arrResep : array of main.hasil_olah);
@@ -94,12 +100,14 @@ Note: minta masukan resep yang ingin dibuat di dalam prosedur dan jangan lupa me
 Langsung keluar dari prosedur jika bahan tidak mencukupi dan tampilkan "Pengolahan gagal. Silakan coba lagi.". <br>
 jualResep digunakan untuk membuat resep tertentu dari bahan mentah dan bahan olahan yang ada di inventori dan menjualnya untuk mendapatkan
 keuntungan. Butuh energi. Bahan yang sudah habis setelah jualResep dijalankan harus dihapus dari inventori. Setiap kali bahan digunakan, jumlahnya akan dikurangi sebanyak 1.
+
 #### hapusBahanKadaluarsa
 ```pascal
 procedure hapusBahanKadaluarsa (var arrInvOlahan : array of main.isi_inventori; arrBahanMentah: array of main.bahan_mentah; var arrInvMentah : array of main.isi_inventori; currentSimulasi: data); 
 ```
 <br>
 Note: Untuk bahan mentah, sesuaikan waktu kadaluarsa dengan selisih antara waktu pembelian Bahan Olahan dengan currentSimulasi.dd, currentSimulasi.mm, currentSimulasi.yy (Jika selisih = 0, bahan kadaluarsa dan akan dihapus). Untuk arrBahanOlahan, seluruh Bahan Olahan memiliki durasi kadaluarsa 3 hari. Cari selisih antara arrBahanOlahan.dd, arrBahanOlahan.mm, arrBahanMentah.yy dengan currentSimulasi.dd, currentSimulasi.mm, currentSimulasi.yy. Jika selisih = 0, bahan akan dihapus dari inventori. Prosedur ini akan digunakan tiap kali prosedur tidur dijalankan.
+
 #### restockBahan - rancang spesifikasinya
 ```pascal 
 procedure restockBahan
@@ -117,6 +125,7 @@ procedure cariResep(arrResep : array of main.hasil_olah);
 ```
 <br>
 Note: resep yang ingin dicari diminta masukannya kepada user di dalam prosedur ini (bukan di luar prosedur). Resep dicari dengan nama.
+
 #### tambahResep
 ```pascal
 procedure tambahResep(var arrResep : array of main.hasil_olah); 
@@ -132,18 +141,21 @@ procedure loadBahanMentah(var arrBahanMentah : array of main.bahan_mentah);
 ```
 <br>
 Note: Load dari listBahanMentah.dat. Return informasi error jika load gagal: "Pesan Error: Gagal memuat file data bahan mentah!".
+
 #### loadBahanOlahan
 ```pascal
 procedure loadBahanOlahan(var arrBahanOlahan : array of main.hasil_olah);
 ```
 <br>
 Note: Load dari listBahanOlahan.dat. Return informasi error jika load gagal: "Pesan Error: Gagal memuat file data bahan olahan!".
+
 #### loadResep
 ```pascal
 procedure loadResep(var arrResep : array of main.hasil_olah); 
 ```
 <br>
 Note: Load dari resep.dat. Return informasi error jika load gagal: "Pesan Error: Gagal memuat file data resep!".
+
 #### loadInventori
 ```pascal
 procedure loadInventori(var arrInvMentah : array of main.isi_inventori; var arrInvOlahan : array of main.isi_inventori); 
@@ -159,12 +171,14 @@ procedure startSimulasi(var currentSimulasi : data, dataSimulasi : array of data
 ```
 <br>
 Note: Start simulasi yang dipilih. Data dari dataSimulasi yg dipilih di-clone ke dalam variabel currentSimulasi.
+
 #### stopSimulasi
 ```pascal
 procedure stopSimulasi(var currentSimulasi : data, dataSimulasi : array of data); 
 ```
 <br>
 Note: Stop simulasi yang sedang dijalankan. Panggil lihatStatistik dari unit aksiStatistik.pas
+
 #### exit
 ```pascal
 procedure exit(var terminateProgram: boolean); 
@@ -180,6 +194,7 @@ procedure saveInventori(var arrInvMentah: array of isi_inventori; var arrInvOlah
 ```
 <br>
 Menyimpan inventori Simulasi ke dalam file eksternal listInvenMentah.dat dan listInvenOlahan.dat
+
 #### saveResep
 ```pascal
 procedure saveResep(var arrResep: array of hasil_olah);
@@ -210,4 +225,4 @@ if conditional checking dilakukan untuk setiap input yang sesuai dengan fitur (c
 Agar dapat berjalan, cantumkan seluruh unit yang digunakan pada bagian implementation (hmmm... sederhananya handler.pas bakal pakai semua unit selain main.pas) <br>
 
 ### main.pas
-main.pas hanya untuk looping runUserInterface sampai variabel terminateProgram bernilai True (Jangan lupa untuk menginisialisasi terminateProgram menjadi False). Seluruh kamus dideklarasikan pada main.pas. Uses handler, aksiSimulasi. 
+main.pas hanya untuk looping runUserInterface sampai variabel terminateProgram bernilai True (Jangan lupa untuk menginisialisasi terminateProgram menjadi False). Seluruh kamus dideklarasikan pada main.pas. Uses handler, aksiSimulasi.
