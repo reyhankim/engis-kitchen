@@ -4,47 +4,71 @@ Tugas Besar Daspro 2018 <br>
 ## Dekomposisi Fungsi
 ### uang.pas
 #### tambahUang
+'''pascal
 procedure tambahUang(var currentSimulasi : main.data; <jumlah_penambahan>);
+'''
 #### kurangUang
+'''pascal
 procedure kurangUang(var currentSimulasi : main.data; <jumlah_pengurangan>);
+'''
 <br>
 
 ### energi.pas
 #### tambahEnergi
+'''pascal
 procedure tambahEnergi(var currentSimulasi: main.data; <jumlah_penambahan>);
+'''
 #### kurangEnergi
+'''pascal
 procedure kurangEnergi(var currentSimulasi: main.data; <jumlah_pengurangan>);
+'''
 <br>
 
 ### inventori.pas
 #### useInventori
-procedure useInventori(var currentSimulasi: main.data); <br>
+'''pascal
+procedure useInventori(var currentSimulasi: main.data); 
+'''<br>
 Prosedur ini akan menggunakan ruang inventori untuk menyimpan bahan.
 #### freeInventori
-procedure freeInventori(var currentSimulasi: main.data); <br>
+'''pascal
+procedure freeInventori(var currentSimulasi: main.data); 
+'''<br>
 Prosedur ini akan membebaskan/mengosongkan ruang inventori jika bahan kadaluarsa/terjual/sudah diolah menjadi resep dan dijual.
 #### lihatInventori
-procedure lihatInventori(arrInvMentah: array of main.isi_inventori; arrInvOlahan: array of main.isi_inventori); <br>
+'''pascal
+procedure lihatInventori(arrInvMentah: array of main.isi_inventori; arrInvOlahan: array of main.isi_inventori);
+''' <br>
 Prosedur ini akan membaca seluruh isi dari array bertipe isi_inventori dan menampilkannya menjadi detail bahan-bahan yang disimpan dalam inventori.
 #### upgradeInventori
-procedure upgradeInventori(var currentSimulasi : main.data); <br>
+'''pascal
+procedure upgradeInventori(var currentSimulasi : main.data);
+''' <br>
 Prosedur ini akan membaca jumlah space inventori yang ingin dibeli oleh user dan mengurangi jumlah uang sesuai dengan space inventori yang dibeli.
 <br>
 
 ### aksiChef.pas
 #### makan
+'''pascal
 procedure makan(var currentSimulasi: main.data; var <variabel_jumlah_makan_hari_ini>);
+'''
 #### istirahat
+'''pascal
 procedure istirahat(var currentSimulasi: main.data; var <variabel_jumlah_istirahat_hari_ini>);
+'''
 #### tidur
-procedure istirahat(var currentSimulasi: main.data; var <variabel_counter_hari_simulasi>); <br>
+'''pascal
+procedure istirahat(var currentSimulasi: main.data; var <variabel_counter_hari_simulasi>); 
+''' <br>
 Catatan: prosedur hapusBahanKadaluarsa harus dijalankan setiap kali prosedur tidur dijalankan.
 <br>
 
 ### aksiBahan.pas
 Jangan lupa untuk mengubah nilai currentSimulasi: main.data, currentSimulasi : main.data, dan <variabel_ruang_inventori_yang_digunakan> dengan menggunakan prosedur pada energi.pas, uang.pas, dan inventori.pas.
 #### beliBahan
-procedure beliBahan(var arrInvMentah : array of main.isi_inventori; arrBahanMentah : array of main.bahan_mentah); <br>
+'''pascal
+procedure beliBahan(var arrInvMentah : array of main.isi_inventori; arrBahanMentah : array of main.bahan_mentah); 
+''' <br>
 Note: minta masukan bahan yang mau dibeli di dalam prosedur. <br>
 beliBahan digunakan untuk membeli bahan mentah dari supermarket. Butuh energi dan uang untuk melakukan beliBahan. Bahan disimpan dalam inventori. Jumlah bahan dalam inventori harus diubah. Jangan lupa untuk melakukan validasi pada setiap aspek (uang tidak mencukupi, inventori tidak mencukupi, dsb.). Jika bahan gagal dibeli, tampilkan "Pembelian bahan gagal, silakan coba lagi."
 #### olahBahan
