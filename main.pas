@@ -12,6 +12,7 @@ var
     currentSimulasi : data;
     uang : longint;
     terminateProgram, simulasiRunning : boolean;
+    todayIstirahatCount, todayMakanCount : integer;
     
 begin
     load();
