@@ -1,6 +1,22 @@
 // file main
 program main;
-uses handler, aksiLoad;
+uses tipe, handler, aksiLoad;
 
-type // deklarasi tipe data bentukan. Pada unit, untuk menggunakan tipe data bentukan ini, gunakan main.<nama_tipe_data_bentukan>
+var
+    arrBahanMentah : array [1..1024] of bahan_mentah;
+    arrBahanOlahan : array [1..1024] of hasil_olah;
+    dataSimulasi : array [1..128] of data;
+    arrInvMentah : array [1..512] of isi_inventori;
+    arrInvOlahan : array [1..512] of isi_inventori;
+    arrResep : array [1..256] of hasil_olah;
+    currentSimulasi : data;
+    uang : longint;
+    terminateProgram, simulasiRunning : boolean;
     
+begin
+    load();
+    terminateProgram := False;
+    while(not(terminateProgram)) do begin
+        runUserInterface();
+    end;
+end.
