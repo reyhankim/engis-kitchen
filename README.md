@@ -108,6 +108,13 @@ procedure hapusBahanKadaluarsa();
 <br>
 Note: Untuk bahan mentah, sesuaikan waktu kadaluarsa dengan selisih antara waktu pembelian Bahan Olahan dengan currentSimulasi.dd, currentSimulasi.mm, currentSimulasi.yy (Jika selisih = 0, bahan kadaluarsa dan akan dihapus). Untuk arrBahanOlahan, seluruh Bahan Olahan memiliki durasi kadaluarsa 3 hari. Cari selisih antara arrBahanOlahan.dd, arrBahanOlahan.mm, arrBahanMentah.yy dengan currentSimulasi.dd, currentSimulasi.mm, currentSimulasi.yy. Jika selisih = 0, bahan akan dihapus dari inventori. Prosedur ini akan digunakan tiap kali prosedur tidur dijalankan.
 
+#### jualOlahan
+```pascal
+procedure jualOlahan(); 
+```
+<br>
+Menjual bahan olahan untuk mendapatkan uang. Mengonsumsi energi dan mengurangi bahan olahan yang tersimpan di inventori.
+
 #### restockBahan - rancang spesifikasinya
 ```pascal 
 procedure restockBahan();
