@@ -115,10 +115,12 @@ procedure jualOlahan();
 <br>
 Menjual bahan olahan untuk mendapatkan uang. Mengonsumsi energi dan mengurangi bahan olahan yang tersimpan di inventori.
 
-#### restockBahan - rancang spesifikasinya
+#### restockBahan
 ```pascal 
 procedure restockBahan();
 ```
+<br>
+Merestock bahan dengan interval hari tertentu. Restock bahan bebas.
 <br>
 
 ### aksiResep.pas
@@ -169,6 +171,13 @@ procedure loadInventori();
 ```
 <br>
 Note: Load dari listInvenMentah.dat dan listInvenOlahan.dat. Return informasi error jika load gagal: "Pesan Error: Gagal memuat file data inventori!".
+
+#### loadSimulasi
+```pascal
+procedure loadSimulasi(); 
+```
+<br>
+Load data simulasi dari file eksternal ke array CurrentSimulasi. Selain itu, panggil seluruh prosedur load sebelumnya ke dalam loadSimulasi().
 <br>
 
 ### aksiSimulasi.pas
@@ -191,7 +200,7 @@ Note: Stop simulasi yang sedang dijalankan. Panggil lihatStatistik dari unit aks
 procedure exit(); 
 ```
 <br>
-Note: panggil seluruh prosedur save (saveResep, saveInventori) pada prosedur ini.
+Note: panggil seluruh prosedur (saveResep, saveInventori) pada prosedur ini.
 <br>
 
 ### aksiSave.pas
@@ -208,6 +217,13 @@ procedure saveResep();
 ```
 <br>
 Menyimpan seluruh resep pada arrResep ke dalam file eksternal resep.dat
+
+#### saveSimulasi
+```pascal
+procedure saveSimulasi(); 
+```
+<br>
+Save data simulasi dari array CurrentSimulasi ke file eksternal. Selain itu, panggil seluruh prosedur save sebelumnya ke dalam saveSimulasi().
 <br>
 
 ### aksiStatistik.pas
@@ -216,7 +232,7 @@ Menyimpan seluruh resep pada arrResep ke dalam file eksternal resep.dat
 procedure lihatStatistik();
 ```
 <br>
-Menampilkan statistik informasi yang sedang dijalankan atau di-stopSimulasi. Buat selengkap dan serapi mungkin~ (bentuk tabel, blablabla)
+Menampilkan statistik informasi dari simulasi sedang dijalankan atau di-stopSimulasi. Buat selengkap dan serapi mungkin~ (bentuk tabel, blablabla)
 <br>
 
 ### handler.pas
