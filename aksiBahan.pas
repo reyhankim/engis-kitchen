@@ -125,9 +125,9 @@ implementation
                 end else if(invenSize > currentSimulasi.inven_Cap) then //Inventori tidak mencukupi
                 begin
                     writeln('Inventori tidak mencukupi, silakan ulangi');
-                end else if(arrBahanMentah[bahanLocation].sisa_bahan < kuantitas) then
+               { end else if(arrBahanMentah[bahanLocation].sisa_bahan < kuantitas) then
                 begin
-                    writeln('Bahan di supermarket kurang, silakan ulangi');
+                    writeln('Bahan di supermarket kurang, silakan ulangi');}
                 end else
                 begin
                     writeln('Total harga: ', totalHarga);
@@ -299,7 +299,7 @@ implementation
             Neff += 1 ;
         end;
     end.
-
+{
     procedure restockBahan();
     var
         curIdx: Integer;
@@ -308,5 +308,5 @@ implementation
         begin
             arrBahanMentah[curIdx].sisaBahan := arrBahanMentah[curIdx].maxBahan
         end;
-    end;
+    end;}
 end.
