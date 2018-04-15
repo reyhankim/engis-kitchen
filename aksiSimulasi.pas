@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 unit aksiSimulasi;
 
 interface
