@@ -1,8 +1,8 @@
 unit aksiresep;
 
-uses tipe;
-
 interface
+
+uses tipe;
 
 procedure lihatResep(arrResep : array of tipe.hasil_olah)
 procedure cariResep(arrResep : array of tipe.hasil_olah)
