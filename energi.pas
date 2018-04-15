@@ -1,29 +1,27 @@
 unit energi;
 
-uses tipe;
-
 interface
-
+uses tipe;
 var
- currentSimulasi : data;
- 
-procedure tambahEnergi(plusEnergi:integer);
+  currentSimulasi :data;
+
+procedure tambahEnergi(var plusEnergi:integer);
 //prosedur dimana ketika melakukan suatu aksi akan menambahkan sebuah energi dari chef
 
-procedure kurangEnergi(minusEnergi:integer);
+procedure kurangEnergi(var minusEnergi:integer);
 //prosedur dimana ketika melakukan suatu aksi akan mengurangi sebuah energi dari chef
 
 
 implementation
 
-procedure tambahEnergi(plusEnergi:integer);
+procedure tambahEnergi(var plusEnergi:integer);
 begin
-	currentSimulasi.energi=currentSimulasi.energi+plusEnergi;
+	currentSimulasi.energi:= currentSimulasi.energi+ plusEnergi;
 end;
 
-procedure kurangEnergi(minusEnergi:integer);
+procedure kurangEnergi(var minusEnergi:integer);
 begin
-	currentSimulasi.energi=currentSimulasi.energi-minusEnergi;
+	currentSimulasi.energi:= currentSimulasi.energi- minusEnergi;
 end;
 
 end.
