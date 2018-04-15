@@ -4,6 +4,9 @@ uses tipe;
 
 interface
 
+var
+ currentSimulasi : data;
+ 
 procedure tambahEnergi(plusEnergi:integer);
 //prosedur dimana ketika melakukan suatu aksi akan menambahkan sebuah energi dari chef
 
