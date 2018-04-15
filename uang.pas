@@ -1,30 +1,28 @@
 unit uang;
 
+interface
 uses tipe;
 
-interface
-
 var
-  currentSimulasi : data;
-  
-  
-procedure tambahUang(plusUang:integer);
+	currentSimulasi : data;
+
+procedure tambahUang(var plusUang:integer);
 //prosedur dimana ketika melakukan suatu aksi akan menambahkan jumlah uang dari chef
 
-procedure kurangUang(minusUang:integer);
+procedure kurangUang(var minusUang:integer);
 //prosedur dimana ketika melakukan suatu aksi akan mengurangi jumlah uang dari chef
 
 
 implementation
 
-procedure tambahUang(plusUang:integer);
+procedure tambahUang(var plusUang:integer);
 begin
-	currentSimulasi.sum_uang=currentSimulasi.sum_uang + plusUang;
+	currentSimulasi.sum_uang:=currentSimulasi.sum_uang + plusUang;
 end;
 
-procedure kurangUang(minusUang:integer);
+procedure kurangUang(var minusUang:integer);
 begin
-	currentSimulasi.sum_uang=currentSimulasi.sum_uang - minusUang;
+	currentSimulasi.sum_uang:=currentSimulasi.sum_uang - minusUang;
 end;
 
 end.
