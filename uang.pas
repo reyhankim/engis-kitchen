@@ -1,5 +1,7 @@
 unit uang;
 
+uses tipe;
+
 interface
 
 procedure tambahUang(plusUang:integer);
