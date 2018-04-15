@@ -23,6 +23,10 @@ implementation
         i,cur: integer;
 
     begin
+        for i := 1 to 100 do //init
+        begin
+            input.arr[i] := '';
+        end;
         readln(filename,s);
         cur := 1;
         for i := 1 to length(s) do 
