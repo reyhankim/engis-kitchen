@@ -4,6 +4,10 @@ uses tipe;
 
 interface
 
+var
+  currentSimulasi : data;
+  
+  
 procedure tambahUang(plusUang:integer);
 //prosedur dimana ketika melakukan suatu aksi akan menambahkan jumlah uang dari chef
 
