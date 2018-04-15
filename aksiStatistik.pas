@@ -11,8 +11,8 @@ uses
 
 var
 	currentSimulasi : data;
-	arrInvMentah : bahan_mentah;
-	arrInvOlahan : hasil_olah;
+	arrBahanMentah : array of bahan_mentah;
+	arrBahanOlahan : array of hasil_olah;
 
 procedure lihatStatistik();
 {Menampilkan statistik informasi yang sedang dijalankan atau di-stopSimulasi. Buat selengkap dan serapi mungkin~ (bentuk tabel, blablabla) }
@@ -22,15 +22,14 @@ procedure lihatStatistik();
 
 //kamus lokal
 var
-	j,i: integer;
+	k,j,i: integer;
 
 BEGIN
 	writeln('==Statistik==');
 	writeln;
 	writeln('Today ',currentSimulasi.dd,'/',currentSimulasi.mm,'/',currentSimulasi.yy);
+	writeln('Hari ke -',currentSimulasi.hh_hidup);
 	writeln('Energi     :',currentSimulasi.energi);
-	writeln('income     :',currentSimulasi.sum_income);
-	writeln('Outcome    :',currentSimulasi.sum_outcome);
 	writeln('Jumlah Uang:','Rp ',currentSimulasi.sum_uang);
 	writeln();
 	writeln();
@@ -38,30 +37,31 @@ BEGIN
 	writeln('==Bahan Mentah==');
 	writeln;
 	i:=1;
-	writeln('|  Nama  ',#9,'|','|  Harga  ',#9,'|','|  Durasi expire  ',#9,'|');
-	while (arrInvMentah.nama[i]<>null) do
+	writeln('|  Nama  ',' ','|','|  Harga  ',' ','|','|  Durasi expire  ',' ','|');
+	while(arrBahanMentah[i].nama<> '') do
 		begin
-		write('|',arrInvMentah.nama[i],#9,'|',arrInvMentah.harga[i],#9,'|',arrInvMentah.dur_exp[i],#9,'|');
+		write('|',arrBahanMentah[i].nama,' ','|',arrBahanMentah[i].harga,' ','|',arrBahanMentah[i].dur_exp,' ','|');
 		i:=i+1;
 		writeln;
 		end;
-		{nanti aku rapihin lagi}
+
 	
 	writeln('==Hasil Olahan==');
 	writeln;
-	i:=1;
-	writeln('|  Nama  ',#9,'|','|  Harga  ',#9,'|','|  Jumlah  ',#9,'|','|  Bahan  ',#9,'|');
-	while (arrInvOlahan.nama[i]<>null) do
+	k:=1;
+	writeln('|  Nama  ',' ','|','|  Harga  ',' ','|','|  Jumlah  ',' ','|','|  Bahan  ',' ','|');
+	while (arrBahanOlahan[k].nama<>'') do
 		begin
-		write('|',arrInvOlahan.nama[i],#9,'|',arrInvOlahan.harga[i],#9,'|',arrInvOlahan.n[i],#9,'|');
+		write('|',arrBahanOlahan[k].nama,' ','|',arrBahanOlahan[k].harga,' ','|',arrBahanOlahan[k].n,' ','|');
 			j:=1;
-			while (arrInvOlahan.bahan[[j]]<>null) do
+			while (arrBahanOlahan[i].bahan<>null) do
 				begin
-					j
-					write(arrInvOlahan.bahan[[j]],',');
+					write(arrBahanOlahan[i].bahan[j],',');
 				end;
 		writeln('|');
 		i:=i+1;
 		end;			
-END.
+END;
+
+end.
 
