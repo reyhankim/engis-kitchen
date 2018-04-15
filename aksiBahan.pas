@@ -6,6 +6,7 @@ interface
     procedure olahBahan();
     procedure jualResep ();
     procedure hapusBahanKadaluarsa (); 
+    procedure restockBahan();
 
 implementation
     function cariNamaBahan(var arrListBahan: array of tipe.bahan_mentah; nama: string): integer;
@@ -124,6 +125,9 @@ implementation
                 end else if(invenSize > currentSimulasi.inven_Cap) then //Inventori tidak mencukupi
                 begin
                     writeln('Inventori tidak mencukupi, silakan ulangi');
+                end else if(arrBahanMentah[bahanLocation].sisa_bahan < kuantitas) then
+                begin
+                    writeln('Bahan di supermarket kurang, silakan ulangi');
                 end else
                 begin
                     writeln('Total harga: ', totalHarga);
@@ -249,7 +253,7 @@ implementation
         namaBahan: string;
     
     begin
-        jualTemplate('Olahan', arrInvOlahan, arrListOlahan);
+        jualTemplate('Olahan', arrInvOlahan, arrBahanOlahan);
     end;
 
     procedure jualResep ();
@@ -295,4 +299,14 @@ implementation
             Neff += 1 ;
         end;
     end.
+
+    procedure restockBahan();
+    var
+        curIdx: Integer;
+    begin
+        while (arrBahanMentah[curIdx].nama <> '') do
+        begin
+            arrBahanMentah[curIdx].sisaBahan := arrBahanMentah[curIdx].maxBahan
+        end;
+    end;
 end.
