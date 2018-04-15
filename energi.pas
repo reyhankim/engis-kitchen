@@ -1,5 +1,7 @@
 unit energi;
 
+uses tipe;
+
 interface
 
 procedure tambahEnergi(plusEnergi:integer);
