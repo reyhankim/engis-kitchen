@@ -78,9 +78,9 @@ implementation
         while not eof(fileInput) do //membaca sampai end of file
         begin
             parseRes := input(fileInput);
-            arrBahanMentah[idx].nama := parseRes.arr[1];
-            arrBahanMentah[idx].harga := convStringToInt(parseRes.arr[2]);
-            arrBahanMentah[idx].dur_exp := convStringToInt(parseRes.arr[3]);
+            tipe.arrBahanMentah[idx].nama := parseRes.arr[1];
+            tipe.arrBahanMentah[idx].harga := convStringToInt(parseRes.arr[2]);
+            tipe.arrBahanMentah[idx].dur_exp := convStringToInt(parseRes.arr[3]);
             idx += 1;
         end;
         close(fileInput);
@@ -96,9 +96,10 @@ implementation
         idx,i: integer;
     
     begin
-        idx := 1;
+        idx := 0;
         Assign(fileInput, FILENAME);
         reset(fileInput);
+        //arrResepTemplate[0].nama := '';
         while not eof(fileInput) do //membaca sampai end of file
         begin
             parseRes := input(fileInput);
@@ -119,7 +120,7 @@ implementation
     //I.S: arrBahanOlahan kosong
     //F.S: arrBahanOlahan terisi
     begin
-        loadResepTemplate(arrBahanOlahan, 'listBahanOlahan.dat')
+        loadResepTemplate(tipe.arrBahanOlahan, 'listBahanOlahan.dat')
     end;
 
     procedure loadResep(); 
@@ -127,7 +128,7 @@ implementation
     //I.S: arrResep kosong
     //F.S: arrResep terisi  
     begin
-        loadResepTemplate(arrResep, 'resep.dat.')
+        loadResepTemplate(tipe.arrResep, 'resep.dat')
     end;
 
     procedure loadInventoriTemplate(var arrInvTemplate: array of tipe.isi_inventori; FILENAME: string);
@@ -137,10 +138,10 @@ implementation
     var
         fileInput : text;
         parseRes: parseResult;
-        idx: integer;
+        idx,i: integer;
     
     begin
-        idx := 1;
+        idx := 0;
         Assign(fileInput, FILENAME);
         reset(fileInput);
         while not eof(fileInput) do //Membaca sampai end of file
@@ -151,6 +152,10 @@ implementation
             arrInvTemplate[idx].mm := convStringToInt(parseRes.arr[3]);
             arrInvTemplate[idx].yy := convStringToInt(parseRes.arr[4]);
             arrInvTemplate[idx].jumlah := convStringToInt(parseRes.arr[5]);
+            for i := 1 to 10 do //update inven_used
+            begin
+                tipe.dataSimulasi[i].inven_used += arrInvTemplate[idx].jumlah;
+            end;
             idx += 1;
         end;
         close(fileInput);
@@ -162,8 +167,8 @@ implementation
     //I.S: arrInvMentah dan arrInvOlahan kosong
     //F.S: arrInvMentah dan arrInvOlahan terisi
     begin
-        loadInventoriTemplate(arrInvMentah, 'listInvenMentah.dat');
-        loadInventoriTemplate(arrInvOlahan, 'listInvenOlahan.dat');
+        loadInventoriTemplate(tipe.arrInvMentah, 'listInvenMentah.dat');
+        loadInventoriTemplate(tipe.arrInvOlahan, 'listInvenOlahan.dat');
     end;
 
     procedure loadSimulasi();
@@ -182,21 +187,20 @@ implementation
         while not eof(fileInput) do //Membaca sampai end of file
         begin
             parseRes := input(fileInput);
-            dataSimulasi[idx].nomor := convStringToInt(parseRes.arr[1]);
-            dataSimulasi[idx].hh_hidup := convStringToInt(parseRes.arr[2]);
-            dataSimulasi[idx].energi := convStringToInt(parseRes.arr[3]);
-            dataSimulasi[idx].inven_cap := convStringToInt(parseRes.arr[4]);
-            dataSimulasi[idx].mentah_dibeli := convStringToInt(parseRes.arr[5]);
-            dataSimulasi[idx].bhn_olah_dibuat := convStringToInt(parseRes.arr[6]);
-            dataSimulasi[idx].bhn_olah_dijual := convStringToInt(parseRes.arr[7]);
-            dataSimulasi[idx].resep_dijual := convStringToInt(parseRes.arr[8]);
-            dataSimulasi[idx].sum_income := convStringToInt(parseRes.arr[9]);
-            dataSimulasi[idx].sum_outcome := convStringToInt(parseRes.arr[10]);
-            dataSimulasi[idx].inven_used := convStringToInt(parseRes.arr[11]);
-            dataSimulasi[idx].sum_uang := convStringToInt(parseRes.arr[12]);
-            dataSimulasi[idx].dd := convStringToInt(parseRes.arr[13]);
-            dataSimulasi[idx].mm := convStringToInt(parseRes.arr[14]);
-            dataSimulasi[idx].yy := convStringToInt(parseRes.arr[15]);
+            tipe.dataSimulasi[idx].nomor := convStringToInt(parseRes.arr[1]);
+            tipe.dataSimulasi[idx].dd := convStringToInt(parseRes.arr[2]);
+            tipe.dataSimulasi[idx].mm := convStringToInt(parseRes.arr[3]);
+            tipe.dataSimulasi[idx].yy := convStringToInt(parseRes.arr[4]);
+            tipe.dataSimulasi[idx].hh_hidup := convStringToInt(parseRes.arr[5]);
+            tipe.dataSimulasi[idx].energi := convStringToInt(parseRes.arr[6]);
+            tipe.dataSimulasi[idx].inven_cap := convStringToInt(parseRes.arr[7]);
+            tipe.dataSimulasi[idx].mentah_dibeli := convStringToInt(parseRes.arr[8]);
+            tipe.dataSimulasi[idx].bhn_olah_dibuat := convStringToInt(parseRes.arr[9]);
+            tipe.dataSimulasi[idx].bhn_olah_dijual := convStringToInt(parseRes.arr[10]);
+            tipe.dataSimulasi[idx].resep_dijual := convStringToInt(parseRes.arr[11]);
+            tipe.dataSimulasi[idx].sum_income := convStringToInt(parseRes.arr[12]);
+            tipe.dataSimulasi[idx].sum_outcome := convStringToInt(parseRes.arr[13]);
+            tipe.dataSimulasi[idx].sum_uang := convStringToInt(parseRes.arr[14]);
             idx += 1;
         end;
         close(fileInput);
