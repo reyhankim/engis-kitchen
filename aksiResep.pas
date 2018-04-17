@@ -19,7 +19,7 @@ i: integer;
 begin
 	carijumlah:=0;
 	i:=1;
-	while(not(arrResep[i].nama='')) do
+	while(not(tipe.arrResep[i].nama='')) do
 	begin
 		carijumlah:=carijumlah+1;
 		i:=i+1;
@@ -34,11 +34,11 @@ begin
 	begin
 	 for j:=1 to i do
 	 begin
-		if (arrResep[j].nama<arrResep[j+1].nama) then
+		if (tipe.arrResep[j].nama<tipe.arrResep[j+1].nama) then
 		begin
-			temp:=arrResep[j];
-			arrResep[j]:=arrResep[j+1];
-			arrResep[j+1]:=temp;
+			temp:=tipe.arrResep[j];
+			tipe.arrResep[j]:=tipe.arrResep[j+1];
+			tipe.arrResep[j+1]:=temp;
 		end;
 	 end;
 	end;
@@ -54,13 +54,13 @@ begin
 	readln(resep);
 	for i:=1 to cariJumlah do
 	begin
-		if(arrResep[i].nama=resep) then
+		if(tipe.arrResep[i].nama=resep) then
 		begin
-			write(arrResep[i].nama);write(' | ');write(arrResep[i].harga);write(' | ');write(arrResep[i].n);
-			for j:=1 to arrResep[i].n do
+			write(tipe.arrResep[i].nama);write(' | ');write(tipe.arrResep[i].harga);write(' | ');write(tipe.arrResep[i].n);
+			for j:=1 to tipe.arrResep[i].n do
 			begin
 				write(' | ');
-				write(arrResep[i].bahan[j]);
+				write(tipe.arrResep[i].bahan[j]);
 			end;
 			ketemu:=1;
 		end;
@@ -76,19 +76,19 @@ var
 i,j : integer;
 begin
 	i:=1;
-	while(arrResep[i].nama <>'') do
+	while(tipe.arrResep[i].nama <>'') do
 	begin
 		i:=i+1;
 	end;	
 	write('Nama Resep: ');
-	readln(arrResep[i].nama);
+	readln(tipe.arrResep[i].nama);
 	write('Harga Jual: ');
-	readln(arrResep[i].harga);
+	readln(tipe.arrResep[i].harga);
 	write('Berapa jumlah Bahan: ');
-	readln(arrResep[i].n);
-	for j:=1 to arrResep[i].n do
+	readln(tipe.arrResep[i].n);
+	for j:=1 to tipe.arrResep[i].n do
 	begin
-		readln(arrResep[i].bahan[j]);
+		readln(tipe.arrResep[i].bahan[j]);
 	end;
 end;
 

@@ -6,23 +6,27 @@ uses tipe;
 var
 	currentSimulasi : data;
 
-procedure tambahUang(var plusUang:integer);
+procedure tambahUang(plusUang:integer);
 //prosedur dimana ketika melakukan suatu aksi akan menambahkan jumlah uang dari chef
 
-procedure kurangUang(var minusUang:integer);
+procedure kurangUang(minusUang:integer);
 //prosedur dimana ketika melakukan suatu aksi akan mengurangi jumlah uang dari chef
 
 
 implementation
 
-procedure tambahUang(var plusUang:integer);
+procedure tambahUang(plusUang:integer);
 begin
-	currentSimulasi.sum_uang:=currentSimulasi.sum_uang + plusUang;
+	tipe.currentSimulasi.sum_income:=tipe.currentSimulasi.sum_income + plusUang;
+	tipe.currentSimulasi.sum_uang:= tipe.currentSimulasi.sum_uang + plusUang;
 end;
 
-procedure kurangUang(var minusUang:integer);
+procedure kurangUang(minusUang:integer);
 begin
-	currentSimulasi.sum_uang:=currentSimulasi.sum_uang - minusUang;
+	tipe.currentSimulasi.sum_outcome:=tipe.currentSimulasi.sum_outcome + minusUang;
+	tipe.currentSimulasi.sum_uang:= tipe.currentSimulasi.sum_uang - minusUang;
 end;
+
+
 
 end.
