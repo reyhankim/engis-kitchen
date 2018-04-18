@@ -5,31 +5,53 @@ interface
     procedure stopSimulasi(); 
     procedure exit(); 
 implementation
-    uses aksiSave,tipe;
-    procedure startSimulasi(); 
+    uses tipe;
+    //uses aksiSave,aksiStatistik
+
+    procedure startSimulasi();
+    //Memulai simulasi 
+    //I.S: simulasiRunning bernilai false
+    //F.S: simulasiRunning bernilai true
     var
         val: Integer;
     begin
         readln(val);
-        if((val <= 0) or (val > 10)) then
+        if(tipe.simulasiRunning) then //Sudah ada simulasi yang berjalan
+        begin
+            writeln('Sudah ada simulasi yang berjalan');
+        end else if((val <= 0) or (val > 10)) then //Simulasi yang diinginkan di luar simulasi yang tersedia
         begin
             writeln('Masukan salah');
-        end else
+        end else  //Validasi berhasil
         begin
-            currentSimulasi := dataSimulasi[val];
-            simulasiRunning := true;
+            tipe.currentSimulasi := tipe.dataSimulasi[val];
+            tipe.simulasiRunning := true;
         end;
-    end.
+    end;
+
     procedure stopSimulasi(); 
+    //Menghentikan simulasi
+    //I.S: simulasiRunning bernilai true
+    //F.S: simulasiRunning bernilai false, statistik simulasi diperlihatkan
     begin
-        simulasiRunning := false;
-        lihatStatistik(currentSimulasi, tipe.arrInvMentah, tipe.arrInvOlahan);
-    end.
+        if(tipe.simulasiRunning = false) then //Tidak ada simulasi yang sedang dijalankan
+        begin
+            writeln('Tidak ada simulasi yang sedang berjalan');
+        end else 
+        begin
+            tipe.simulasiRunning := false;
+        end;
+        lihatStatistik();
+    end;
+
     procedure exit(); 
+    //Keluar dari program
+    //I.S: terminateProgram bernilai False
+    //F.S: Data inventori, resep, dan simulasi disimpan di dalam file external. terminateProgram bernilai true
     begin
         saveInventori();
         saveResep();
         saveSimulasi();
-        terminateProgram = true;
-    end.
+        tipe.terminateProgram := true;
+    end;
 end.

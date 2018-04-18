@@ -1,9 +1,10 @@
 unit aksiBahan;
 
 interface
-    uses tipe;
+    uses tipe, inventori, uang, energi;
     procedure beliBahan(); 
     procedure olahBahan();
+    procedure jualOlahan();
     procedure jualResep ();
     procedure hapusBahanKadaluarsa (); 
     procedure restockBahan();
@@ -16,7 +17,7 @@ implementation
     var
         curIdx: integer;
     begin
-        curIdx := 1;
+        curIdx := 0;
         cariNamaBahan := -1;
         while((arrListBahan[curIdx].nama <> '') and (arrListBahan[curIdx].nama <> nama)) do 
         begin
@@ -36,7 +37,7 @@ implementation
         curIdx: integer;
     begin
         cariNamaOlahan := -1;
-        curIdx := 1;
+        curIdx := 0;
         while((arrListOlahan[curIdx].nama <> '') and (arrListOlahan[curIdx].nama <> nama)) do 
         begin
             curIdx += 1;
@@ -48,12 +49,15 @@ implementation
     end;
 
     function cariNamaInventori(var arrInv: array of isi_inventori; nama: string): integer;
+    //Mencari apakah terdapat nama pada arrInv. Jika ada keluarkan indeksnya. Jika tidak keluarkan -1
+    //I.S: arrInv dan nama terdefinisi, cariNamaInventori bernilai -1
+    //F.S: cariNamaInventori bernilai -1 jika tidak ada atau bernilai indeks nama yang dicari jika ada
     var
         curIdx: Integer;
 
     begin
         cariNamaInventori := -1;
-        curIdx := 1;
+        curIdx := 0;
         while((arrInv[curIdx].nama <> '') and (arrInv[curIdx].nama <> nama)) do
         begin
             curIdx += 1;
@@ -73,7 +77,7 @@ implementation
 
     begin
         cariString := -1;
-        curIdx := 1;
+        curIdx := 0;
         while((arrString[curIdx] <> '') and (arrString[curIdx] <> val)) do
         begin
             curIdx += 1;
@@ -92,37 +96,56 @@ implementation
         convertToHari := dd + 30*mm + 360*yy;
     end;
 
-    procedure beliBahan(var arrInvMentah : array of tipe.isi_inventori; arrBahanMentah : array of tipe.bahan_mentah); 
-    //Membeli suatu bahan di supermarket
-    //I.S : 
-    //F.S :
+    procedure deleteInventori(targetIdx: integer; var arrInv: array of isi_inventori);
+    //Menghilangkan targetIdx dari arrInv
+    //I.S: arrInv dan arrInv[targetIdx] terdefinisi
+    //F.S: Isi dari arrInv[targetIdx] hilang
     var
-        Neff, totalInven, bahanLocation, invenSize: integer;
+        temp: isi_inventori;
+    begin
+        while(arrInv[targetIdx+1].nama <> '') do
+        begin
+            temp := arrInv[targetIdx+1];
+            arrInv[targetIdx+1] := arrInv[targetIdx];
+            arrInv[targetIdx] := temp;
+            targetIdx += 1;
+        end;
+        arrInv[targetIdx].nama := '';
+    end;
+
+    procedure beliBahan(); 
+    //Membeli suatu bahan di supermarket
+    //I.S : arrInvMentah, arrBahanMentah, bahan yang diinginkan terdefinisi. Uang, energi, dan inventori yang tersedia cukup
+    //F.S : Bahan yang dibeli masuk ke dalam arrInvMentah
+    var
+        Neff, bahanLocation, invenSize: integer;
         totalHarga, kuantitas: longint;
-        bisaBeli: boolean;
         namaBahan: string;
     begin
-        if(currentSimulasi.energi = 0) then //Energi cukup
+        if(tipe.currentSimulasi.energi = 0) then //Energi cukup
         begin
             writeln('Energi tidak mencukupi, silakan ulangi');
         end else
         begin
             write('Nama Bahan: ');
             readln(namaBahan);
-            bahanLocation := cariNamaBahan(arrBahanMentah, namaBahan);
+            writeln(namaBahan);
+            bahanLocation := cariNamaBahan(tipe.arrBahanMentah, namaBahan);
             if(bahanLocation = -1) then //Bahan tidak ada di supermarket
             begin
                 writeln('Bahan tidak ada, silakan ulangi');
             end else
             begin
+                bahanLocation += 1;
+                writeln(bahanLocation);
                 write('Kuantitas: ');
                 readln(kuantitas);
-                totalHarga := kuantitas*arrBahanMentah[bahanLocation].harga;
+                totalHarga := kuantitas*tipe.arrBahanMentah[bahanLocation].harga;
                 invenSize := kuantitas + tipe.currentSimulasi.inven_Used;
                 if(totalHarga > tipe.currentSimulasi.sum_Uang) then //Uang tidak mencukupi
                 begin
                     writeln('Uang tidak mencukupi, silakan ulangi');
-                end else if(invenSize > currentSimulasi.inven_Cap) then //Inventori tidak mencukupi
+                end else if(invenSize > tipe.currentSimulasi.inven_Cap) then //Inventori tidak mencukupi
                 begin
                     writeln('Inventori tidak mencukupi, silakan ulangi');
                { end else if(arrBahanMentah[bahanLocation].sisa_bahan < kuantitas) then
@@ -135,76 +158,81 @@ implementation
                     kurangUang(totalHarga);
                     kurangEnergi(1);
                     Neff := 1;
-                    while(arrInvMentah[Neff].nama <> '') do //Mencari Neff
+                    while(tipe.arrInvMentah[Neff].nama <> '') do //Mencari Neff
                     begin
                         Neff += 1;
                     end;
                     
-                    arrInvMentah[Neff].nama := nama;
-                    arrInvMentah[Neff].dd := currentSimulasi.dd;
-                    arrInvMentah[Neff].mm := currentSimulasi.mm;
-                    arrInvMentah[Neff].yy := currentSimulasi.yy;
-
+                    tipe.arrInvMentah[Neff].nama := namaBahan;
+                    tipe.arrInvMentah[Neff].dd := tipe.currentSimulasi.dd;
+                    tipe.arrInvMentah[Neff].mm := tipe.currentSimulasi.mm;
+                    tipe.arrInvMentah[Neff].yy := tipe.currentSimulasi.yy;
+                    tipe.arrInvMentah[Neff].jumlah := kuantitas;
+                    tipe.currentSimulasi.mentah_dibeli += kuantitas;
                     writeln('Bahan telah berhasil dibeli');
                 end;
             end;   
         end;
     end;
 
-    procedure olahBahan(var arrInvOlahan : array of tipe.isi_inventori; arrBahanOlahan : array of tipe.hasil_olah);
-    //I.S:
-    //F.S:
+    procedure olahBahan();
+    //Mengolah bahan mentah menjadi bahan olahan
+    //I.S: Bahan olahan, arrInvOlahan, arrBahanOlahan terdefinisi. Bahan mentah yang dibutuhkan dan energi cukup.
+    //F.S: Bahan mentah yang dibutuhkan dan energi berkurang, bahan olahan yang dibuat bertambah
     var
-        Neff, totalInven, bahanLocation, invenSize, i: integer;
-        totalHarga: longint;
-        bisaBeli, bahanCukup: boolean;
+        Neff, bahanLocation, i: integer;
+        bahanCukup: boolean;
         namaBahan: string;
     begin
-        if(currentSimulasi.energi = 0) then //Energi cukup
+        if(tipe.currentSimulasi.energi = 0) then //Energi cukup
         begin
             writeln('Energi tidak mencukupi, silakan ulangi');
         end else
         begin
             write('Nama Bahan: ');
             readln(namaBahan);
-            bahanLocation := cariNamaOlahan(arrBahanOlahan, namaBahan);
+            bahanLocation := cariNamaOlahan(tipe.arrBahanOlahan, namaBahan);
             if(bahanLocation = -1) then //Bahan tidak ada di list bahan olahan
             begin
                 writeln('Bahan tidak terdefinisi, silakan ulangi');
             end else
             begin
+                bahanLocation += 1;
                 bahanCukup := true;
-                for i := 1 to arrBahanOlahan[bahanLocation].n do
+                writeln(tipe.arrBahanOlahan[bahanLocation+1].n);
+                for i := 1 to tipe.arrBahanOlahan[bahanLocation].n do
                 begin
-                    if(cariNamaBahan(arrInvMentah,arrBahanOlahan[bahanLocation].bahan[i]) = -1) then //bahan tidak terdapat di inventori
+                    if(cariNamaInventori(tipe.arrInvMentah,tipe.arrBahanOlahan[bahanLocation].bahan[i]) = -1) then //bahan tidak terdapat di inventori
                     begin
                         bahanCukup := false;
                     end;
                 end;
                 if(bahanCukup) then
                 begin
-                    for i := 1 to arrBahanOlahan[bahanLocation].n do //mengurangi jumlah bahan pada inventori
+                    for i := 1 to tipe.arrBahanOlahan[bahanLocation].n do //mengurangi jumlah bahan pada inventori
                     begin
-                        arrInvMentah[cariString(arrInvMentah,arrBahanOlahan[bahanLocation].bahan[i])].jumlah -= 1;
+                        arrInvMentah[cariNamaInventori(tipe.arrInvMentah,tipe.arrBahanOlahan[bahanLocation].bahan[i])].jumlah -= 1;
                         freeInventori(1);
                     end;     
-                    if(tipe.currentSimulasi.invenUsed = currentSimulasi.invenCap) then //Inventori tidak mencukupi
+                    if(tipe.currentSimulasi.inven_used = tipe.currentSimulasi.inven_cap) then //Inventori tidak mencukupi
                     begin
                         writeln('Inventori penuh, silakan ulangi');
                     end else
                     begin
                         useInventori(1);
                         kurangEnergi(1);
-                        while(arrInvOlahan[Neff].nama <> '') do //Mencari Neff
+                        Neff := 1;
+                        while(tipe.arrInvOlahan[Neff].nama <> '') do //Mencari Neff
                         begin
                             Neff += 1;
                         end;
 
-                        arrInvOlahan[Neff].nama := namaBahan;
-                        arrInvOlahan[Neff].dd := currentSimulasi.dd;
-                        arrInvOlahan[Neff].mm := currentSimulasi.mm;
-                        arrInvOlahan[Neff].yy := currentSimulasi.yy;
-
+                        tipe.arrInvOlahan[Neff].nama := namaBahan;
+                        tipe.arrInvOlahan[Neff].dd := tipe.currentSimulasi.dd;
+                        tipe.arrInvOlahan[Neff].mm := tipe.currentSimulasi.mm;
+                        tipe.arrInvOlahan[Neff].yy := tipe.currentSimulasi.yy;
+                        tipe.arrInvOlahan[Neff].jumlah := 1;
+                        tipe.currentSimulasi.bhn_olah_dibuat += 1;
                         writeln('Bahan telah berhasil diolah');
                     end;                    
                 end else
@@ -215,98 +243,175 @@ implementation
         end;
     end;
 
-    procedure jualTemplate(jenisJualan: string; var arrInvJenis: array of isi_inventori; var arrListJenis: array of hasil_olah);
+    procedure jualOlahan();
+    //Menjual bahan olahan
+    //I.S: arrInvOlahan dan arrBahanOlahan terdefinisi
+    //F.S: Bahan olahan yang akan dijual telah terjual, uang bertambah, energi berkurang.
     var
         hargaJual: longint;
-        bahanLocation, olahanDesc: integer;
+        olahanLocation, olahanDesc: integer;
         namaJual: string;
 
     begin
-        if(currentSimulasi.energi = 0) then
+        if(tipe.currentSimulasi.energi = 0) then
         begin
             writeln('Energi tidak cukup, silakan ulangi');
         end else
         begin
-            write('Nama ', jenisJualan, ': ');
+            write('Nama Olahan : ');
             readln(namaJual);
-            bahanLocation := cariNamaInventori(arrInvJenis, namaJual);
-            if(bahanLocation = -1) then //Bahan tidak ada di inventori
+            olahanLocation := cariNamaInventori(tipe.arrInvOlahan, namaJual);
+            if(olahanLocation = -1) then //Bahan tidak ada di inventori
             begin
-                writeln('Bahan tidak ada di inventori, silakan ulangi');
+                writeln('Bahan olahan tidak ada di inventori, silakan ulangi');
             end else
             begin
-                olahanDesc := cariNamaOlahan(arrListJenis, namaJual);
-                hargaJual := arrListJenis[olahanDesc].harga;
-                tambahUang(hargaJual);
-                kurangEnergi(1);
-                freeInventori(1);
-                writeln(namaJual, ' telah dijual');
-                writeln('Anda mendapat ', hargaJual);
+                olahanLocation += 1;
+                if(tipe.arrInvOlahan[olahanLocation].jumlah = 0) then
+                begin
+                    writeln('Bahan olahan tidak ada di inventori, silakan ulangi');
+                    deleteInventori(olahanLocation, arrInvOlahan)
+                end else
+                begin
+                    olahanDesc := cariNamaOlahan(tipe.arrBahanOlahan, namaJual);
+                    olahanDesc += 1;
+                    hargaJual := tipe.arrBahanOlahan[olahanDesc].harga;
+                    tambahUang(hargaJual);
+                    kurangEnergi(1);
+                    freeInventori(1);
+                    tipe.arrInvOlahan[olahanLocation].jumlah -= 1;
+                    if(tipe.arrInvOlahan[olahanLocation].jumlah = 0) then
+                    begin
+                        deleteInventori(olahanLocation,arrInvOlahan);
+                    end;
+                    writeln(namaJual, ' telah dijual');
+                    writeln('Anda mendapat ', hargaJual);
+                end;
             end;
         end;
     end;
 
-    procedure jualOlahan();
+    procedure jualResep ();
+    //Menjual resep
+    //I.S: arrInvOlahan dan arrResep terdefinisi
+    //F.S: Resep yang akan dijual telah terjual, uang bertambah, energi berkurang
+
     var
         hargaJual: longint;
-        bahanLocation, olahanDesc: integer;
-        namaBahan: string;
-    
-    begin
-        jualTemplate('Olahan', arrInvOlahan, arrBahanOlahan);
-    end;
+        resepLocation,i: integer;
+        namaJual: string;
+        bahanCukup: boolean;
 
-    procedure jualResep ();
     begin
-        jualTemplate('Resep', arrInvOlahan, arrResep);
-    end;
-
-    procedure deleteInventori(targetIdx: integer; var arrInv: array of isi_inventori);
-    var
-        temp: isi_inventori;
-    begin
-        while(arrInv[targetIdx+1] <> '') do
+        if(tipe.currentSimulasi.energi = 0) then
         begin
-            temp := arrInv[targetIdx+1];
-            arrInv[targetIdx+1] := arrInv[targetIdx];
-            arrInv[targetIdx] := temp;
-            targetIdx += 1;
+            writeln('Energi tidak cukup, silakan ulangi');
+        end else
+        begin
+            write('Nama Olahan : ');
+            readln(namaJual);
+            resepLocation := cariNamaOlahan(tipe.arrResep, namaJual);
+            if(resepLocation = -1) then //Bahan tidak ada di inventori
+            begin
+                writeln('Bahan olahan tidak ada di inventori, silakan ulangi');
+            end else
+            begin
+                resepLocation += 1;
+                bahanCukup := true;
+                for i := 1 to tipe.arrResep[resepLocation].n do
+                begin
+                    if(cariNamaInventori(tipe.arrInvMentah,tipe.arrResep[resepLocation].bahan[i]) = -1) then
+                    begin
+                        if(cariNamaInventori(tipe.arrInvOlahan,tipe.arrResep[resepLocation].bahan[i]) = -1) then
+                        begin
+                            bahanCukup := false;
+                        end;
+                    end;
+                end;
+                if(bahanCukup) then
+                begin
+                    for i := 1 to tipe.arrResep[resepLocation].n do
+                    begin
+                        if(cariNamaInventori(tipe.arrInvMentah,tipe.arrResep[resepLocation].bahan[i]) = -1) then
+                        begin
+                            tipe.arrInvMentah[cariNamaInventori(tipe.arrInvMentah,tipe.arrResep[resepLocation].bahan[i])].jumlah -= 1;
+                        end else
+                        begin
+                            tipe.arrInvOlahan[cariNamaInventori(tipe.arrInvOlahan,tipe.arrResep[resepLocation].bahan[i])].jumlah -= 1;
+                        end;
+                    end;
+                    freeInventori(tipe.arrResep[resepLocation].n);
+                    hargaJual := tipe.arrResep[resepLocation].harga;
+                    tambahUang(hargaJual);
+                    kurangEnergi(1);
+                    writeln(namaJual, ' telah dijual');
+                    writeln('Anda mendapat ', hargaJual);
+                end else
+                begin
+                    writeln('Bahan tidak cukup, silakan ulangi');
+                end;
+            end;
         end;
-        arrInv[targetIdx].nama := '';
     end;
 
-    procedure hapusBahanKadaluarsa (var arrInvOlahan : array of tipe.isi_inventori; arrBahanMentah: array of tipe.bahan_mentah; var arrInvMentah : array of tipe.isi_inventori; currentSimulasi: data); 
+    procedure hapusBahanKadaluarsa (); 
+    //Menghapus bahan yang sudah kadaluarsa
+    //I.S: arrInvMentah dan arrInvOlahan terdefinisi
+    //F.S: Semua bahan yang tanggal kadaluarsanya <= tanggal hari pada simulasi akan dihapus
     var
         convertCurrentHari: Integer;
         Neff: integer;
 
     begin
-        convertCurrentHari := convertToHari(currentSimulasi.dd, currentSimulasi.mm, currentSimulasi.yy);
-        while(arrInvMentah[Neff].nama <> '') do
+        Neff := 1;
+        convertCurrentHari := convertToHari(tipe.currentSimulasi.dd, tipe.currentSimulasi.mm, tipe.currentSimulasi.yy);
+        while(tipe.arrInvMentah[Neff].nama <> '') do
         begin
-            if(convertCurrentHari - convertToHari(arrInvMentah[Neff].dd, arrInvMentah[Neff].mm, arrInvMentah[Neff].yy) <= 0) then
+            if(convertCurrentHari - convertToHari(tipe.arrInvMentah[Neff].dd, tipe.arrInvMentah[Neff].mm, tipe.arrInvMentah[Neff].yy) <= 0) then
             begin
-                deleteInventori(Neff, arrInvMentah);
+                deleteInventori(Neff, tipe.arrInvMentah);
             end;
             Neff += 1;
         end;
-        while(arrInvOlahan[Neff].nama <> '') do
+        while(tipe.arrInvOlahan[Neff].nama <> '') do
         begin
-            if(convertCurrentHari - convertToHari(arrInvOlahan[Neff].dd+3, arrInvOlahan[Neff].mm, arrInvOlahan[Neff].yy) <= 0) then
+            if(convertCurrentHari - convertToHari(tipe.arrInvOlahan[Neff].dd+3, tipe.arrInvOlahan[Neff].mm, tipe.arrInvOlahan[Neff].yy) <= 0) then
             begin
-                deleteInventori(Neff, arrInvOlahan);
+                deleteInventori(Neff, tipe.arrInvOlahan);
             end;
             Neff += 1 ;
         end;
-    end.
-{
+    end;
+
     procedure restockBahan();
+    //Random 1 bahan jumlahnya random 1-5
     var
-        curIdx: Integer;
+        Neff: Integer;
+        val, idx: integer;
     begin
-        while (arrBahanMentah[curIdx].nama <> '') do
+        Neff := 1;
+        randomize;
+        if Random < 0.33 then
         begin
-            arrBahanMentah[curIdx].sisaBahan := arrBahanMentah[curIdx].maxBahan
+            while(arrBahanMentah[Neff].nama <> '') do
+            begin
+                Neff += 1;
+            end;
+            Neff -= 1;
+            idx := round(Neff*random);
+            val := 1+round(5*random);
+            Neff := 1;
+            while(arrInvMentah[Neff].nama <> '') do
+            begin
+                Neff += 1;
+            end;  
+            tipe.arrInvMentah[Neff].nama := tipe.arrBahanMentah[idx].nama;
+            tipe.arrInvMentah[Neff].dd := tipe.currentSimulasi.dd;
+            tipe.arrInvMentah[Neff].mm := tipe.currentSimulasi.mm;
+            tipe.arrInvMentah[Neff].yy := tipe.currentSimulasi.yy;
+            tipe.arrInvMentah[Neff].jumlah := val;
+            writeln('Saat terbangun di pagi hari, ada seseorang yang menaruh ',tipe.arrInvMentah[Neff].nama, ' di depan restoran anda!');
+            writeln('Anda mendapatkan ', tipe.arrInvMentah[Neff].nama, ' sebanyak ', tipe.arrInvMentah[Neff].jumlah);
         end;
-    end;}
+    end;
 end.
