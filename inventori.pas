@@ -50,11 +50,13 @@ implementation
 	procedure lihatInventori();
 	//Melihat isi inventori bahan mentah dan olahan
 	//I.S: arrInvMentah dan arrInvOlahan terdefinisi
-	//F.S: Isi inventori bahan mentah dan olahan telah teroutput
+	//F.S: Isi inventori bahan mentah dan olahan telah teroutput. arrInvMentah dan arrInvOlahan telah terurut
 	begin
+		sort(arrInvMentah);
 		writeln('Inventori Bahan Mentah:');
 		lihatInventoriTemplate(tipe.arrInvMentah);
 		writeln();
+		sort(arrInvOlahan);
 		writeln('Inventori Bahan Olahan:');
 		lihatInventoriTemplate(tipe.arrInvOlahan);
 		writeln();
