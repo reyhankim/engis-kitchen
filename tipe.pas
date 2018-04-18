@@ -7,6 +7,7 @@ interface
                             nama : string;
                             harga : longint;
                             dur_exp : integer;
+                            stock: integer;
                         end;
                         
         hasil_olah = record

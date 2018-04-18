@@ -2,7 +2,7 @@ unit sort;
 
 interface
 	uses tipe;
-	procedure sortBahanMentah(var arr: array of bahan_mentah);
+	procedure sortBahanMentah(var arr: array of tipe.bahan_mentah);
 	procedure sortHasilOlah(var arr: array of hasil_olah);
 	procedure sortIsiInventori(var arr: array of isi_inventori);
 
@@ -20,7 +20,7 @@ implementation
 		while(sorted <> True) do 
 		begin
 			sorted := True;
-			i := 0;
+			i := 1;
 			while(arr[i+1].nama <> '') do
 			begin
 				if(arr[i+1].nama < arr[i].nama) then

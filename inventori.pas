@@ -6,7 +6,7 @@ interface
 	procedure lihatInventori();
 	procedure upgradeInventori();
 implementation
-	uses tipe,uang;
+	uses tipe,uang,sort;
 	procedure useInventori(plusInventori: integer); 
 	//Menambah inventori yang terpakai pada simulasi sebesar plusInventori
 	//I.S: plusInventori bernilai bilangan bulat non-negatif
@@ -52,11 +52,11 @@ implementation
 	//I.S: arrInvMentah dan arrInvOlahan terdefinisi
 	//F.S: Isi inventori bahan mentah dan olahan telah teroutput. arrInvMentah dan arrInvOlahan telah terurut
 	begin
-		sort(arrInvMentah);
+		sortIsiInventori(tipe.arrInvMentah);
 		writeln('Inventori Bahan Mentah:');
 		lihatInventoriTemplate(tipe.arrInvMentah);
 		writeln();
-		sort(arrInvOlahan);
+		sortIsiInventori(tipe.arrInvOlahan);
 		writeln('Inventori Bahan Olahan:');
 		lihatInventoriTemplate(tipe.arrInvOlahan);
 		writeln();
