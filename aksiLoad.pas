@@ -28,6 +28,7 @@ implementation
             input.arr[i] := '';
         end;
         readln(filename,s);
+        s += ' ';
         cur := 1;
         for i := 1 to length(s) do 
         begin
@@ -82,6 +83,7 @@ implementation
             tipe.arrBahanMentah[idx].harga := convStringToInt(parseRes.arr[2]);
             tipe.arrBahanMentah[idx].dur_exp := convStringToInt(parseRes.arr[3]);
             tipe.arrBahanMentah[idx].stock := convStringToInt(parseRes.arr[4]);
+            writeln(tipe.arrBahanMentah[idx].stock);
             idx += 1;
         end;
         close(fileInput);
@@ -188,7 +190,8 @@ implementation
         while not eof(fileInput) do //Membaca sampai end of file
         begin
             parseRes := input(fileInput);
-            tipe.dataSimulasi[idx].nomor := convStringToInt(parseRes.arr[1]);
+            idx := convStringToInt(parseRes.arr[1]);
+            tipe.dataSimulasi[idx].nomor := idx;
             tipe.dataSimulasi[idx].dd := convStringToInt(parseRes.arr[2]);
             tipe.dataSimulasi[idx].mm := convStringToInt(parseRes.arr[3]);
             tipe.dataSimulasi[idx].yy := convStringToInt(parseRes.arr[4]);
@@ -202,7 +205,6 @@ implementation
             tipe.dataSimulasi[idx].sum_income := convStringToInt(parseRes.arr[12]);
             tipe.dataSimulasi[idx].sum_outcome := convStringToInt(parseRes.arr[13]);
             tipe.dataSimulasi[idx].sum_uang := convStringToInt(parseRes.arr[14]);
-            idx += 1;
         end;
         close(fileInput);
     end;

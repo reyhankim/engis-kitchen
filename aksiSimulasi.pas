@@ -5,8 +5,7 @@ interface
     procedure stopSimulasi(); 
     procedure exit(); 
 implementation
-    uses tipe;
-    //uses aksiSave,aksiStatistik
+    uses tipe, aksiSave,aksiStatistik;
 
     procedure startSimulasi();
     //Memulai simulasi 
@@ -25,12 +24,13 @@ implementation
         end else  //Validasi berhasil
         begin
             tipe.currentSimulasi := tipe.dataSimulasi[val];
+            tipe.dataSimulasi[val].nomor := val;
             tipe.simulasiRunning := true;
         end;
     end;
 
     procedure stopSimulasi(); 
-    //Menghentikan simulasi
+    //Menghentikan simulasi dan memasukkan currentSimulasi ke data
     //I.S: simulasiRunning bernilai true
     //F.S: simulasiRunning bernilai false, statistik simulasi diperlihatkan
     begin
@@ -40,6 +40,7 @@ implementation
         end else 
         begin
             tipe.simulasiRunning := false;
+            tipe.dataSimulasi[tipe.currentSimulasi.nomor] := tipe.currentSimulasi;
         end;
         lihatStatistik();
     end;
