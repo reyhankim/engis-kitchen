@@ -4,34 +4,18 @@ unit handler;
 interface
 uses tipe,aksiChef,energi,uang,inventori,aksiStatistik,aksiSave,aksiSimulasi,aksiLoad,aksiResep,aksiBahan; 
 
-procedure runUserInterface(var terminateProgram : boolean); 
-
-
-{Fungsional masukan dan keluaran, mengecek perintah yang dimasukkan oleh user dengan if conditional,
-dan menjalankan prosedur pada unit-unit lainnya sesuai dengan masukan dari user. 
-Jika user memasukkan "exit", terminateProgram akan bernilai true sehingga runUserInterface tidak di-loop lagi pada main.pas.
-
-if conditional checking dilakukan untuk setiap input yang sesuai dengan fitur (cek spesifikasi tubes. Contoh terdapat pada halaman 6). 
-Setiap baris harus terdapat "> ". Jika input user tidak sesuai dengan string yang ada pada bagian fitur (misal 'startSimulasi' diinput menjadi 'mulaiSimulasi'),
- minta user mengulangi input.
-
-Agar dapat berjalan, cantumkan seluruh unit yang digunakan pada bagian implementation (hmmm... sederhananya handler.pas bakal pakai semua unit selain main.pas)}
+procedure runUserInterface(); 
 
 implementation
-uses tipe,aksiChef,energi,uang,inventori,aksiStatistik,aksiSave,aksiSimulasi,aksiLoad,aksiResep,aksiBahan; 
+ 
 
 procedure runUserInterface(); 
 
 
 {Fungsional masukan dan keluaran, mengecek perintah yang dimasukkan oleh user dengan if conditional,
-dan menjalankan prosedur pada unit-unit lainnya sesuai dengan masukan dari user. 
-Jika user memasukkan "exit", terminateProgram akan bernilai true sehingga runUserInterface tidak di-loop lagi pada main.pas.
-
-if conditional checking dilakukan untuk setiap input yang sesuai dengan fitur (cek spesifikasi tubes. Contoh terdapat pada halaman 6). 
-Setiap baris harus terdapat "> ". Jika input user tidak sesuai dengan string yang ada pada bagian fitur (misal 'startSimulasi' diinput menjadi 'mulaiSimulasi'),
- minta user mengulangi input.
-
-Agar dapat berjalan, cantumkan seluruh unit yang digunakan pada bagian implementation (hmmm... sederhananya handler.pas bakal pakai semua unit selain main.pas)}
+dan menjalankan prosedur pada unit-unit lainnya sesuai dengan masukan dari user. }
+{I.S. : masukan dari user berdasarkan spesifikasi fungsi
+* F.S. : terpanggil prosedur yang sesuai denga masukan yang diinginkan pengguna}
 
 {KAMUS LOKAL}
 var
@@ -41,55 +25,77 @@ strCommand : string;
 {ALGORITMA LOKAL}
 begin
 
-	strCommand := '';
+	strCommand := ''; {Definisikan sebuah string kosong sebagai tempat menyimpan masukan yang telah dibaca}
 	repeat
 		read(c);
 		strCommand := strCommand + c;
-	until (c = ' ' or '\n'); 
+	until ((c = ' ') or (c = '\n')); {Berhenti membaca masukan ketika menemukan spasi atau baris baru}
 	
-if (simulasiRunning) then
-begin
+if (simulasiRunning) then {simulasiRunning merupakan tipe boolean yang berubah kondisi ketika pengguna memasukkan masukan "start", berada di unit aksiSimulasi, dan bernilai true ketika simulasi berjalan}
+begin	{jika masukan yang terbaca sesuai dengan fungsi yang ada, maka akan menjalankan fungsi tersebut. Masukan ini berjalan saat simulasiRunning=true atau saat simulasi berjalan}
 	if (strCommand = 'stopSimulasi') then
-	stopSimulasi(); 
-	else if (strCommand = 'beliBahan') then
-	beliBahan(arrInvMentah,arrBahanMentah);
-	else if (strCommand = 'olahBahan') then
+	begin
+	stopSimulasi();
+	end else if (strCommand = 'beliBahan') then
+	begin
+	beliBahan();
+	end else if (strCommand = 'olahBahan') then
+	begin
 	olahBahan();
-	else if (strCommand = 'jualOlahan') then
+	end else if (strCommand = 'jualOlahan') then
+	begin
 	jualOlahan();
-	else if (strCommand = 'jualResep') then
+	end else if (strCommand = 'jualResep') then
+	begin
 	jualResep();
-	else if (strCommand = 'makan') then
+	end else if (strCommand = 'makan') then
+	begin
 	makan();
-	else if (strCommand = 'istirahat') then
+	end else if (strCommand = 'istirahat') then
+	begin
 	istirahat();
-	else if (strCommand = 'tidur') then
+	end else if (strCommand = 'tidur') then
+	begin
 	istirahat();
-	else if (strCommand = 'lihatStatistik') then
+	end else if (strCommand = 'lihatStatistik') then
+	begin
 	lihatStatistik();
-	else if (strCommand = 'lihatInventori') then
+	end else if (strCommand = 'lihatInventori') then
+	begin
 	lihatInventori();
-	else if (strCommand = 'lihatResep') then
+	end else if (strCommand = 'lihatResep') then
+	begin
 	lihatResep();
-	else if (strCommand = 'cariResep') then
+	end else if (strCommand = 'cariResep') then
+	begin
 	cariResep();
-	else if (strCommand = 'tambahResep') then
+	end else if (strCommand = 'tambahResep') then
+	begin
 	tambahResep();
-	else if (strCommand = 'upgradeInventori') then
+	end else if (strCommand = 'upgradeInventori') then
+	begin
 	upgradeInventori();
-end else begin
+	end;
+end else begin	{ masukan yang dapat diterima pada saat simulasi tidak berjalan}
 	if (strCommand = 'lihatStatistik') then
+	begin
 	lihatStatistik();
-	else if (strCommand = 'lihatInventori') then
+	end else if (strCommand = 'lihatInventori') then
+	begin
 	lihatInventori();
-	else if (strCommand = 'lihatResep') then
+	end else if (strCommand = 'lihatResep') then
+	begin
 	lihatResep();
-	else if (strCommand = 'cariResep') then
+	end else if (strCommand = 'cariResep') then
+	begin
 	cariResep();
-	else if (strCommand = 'tambahResep') then
+	end else if (strCommand = 'tambahResep') then
+	begin
 	tambahResep();
-	else if (strCommand = 'upgradeInventori') then
+	end else if (strCommand = 'upgradeInventori') then
+	begin
 	upgradeInventori();
+	end;
 end;
 end;
 end.
