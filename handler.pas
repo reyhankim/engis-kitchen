@@ -77,7 +77,10 @@ begin	{jika masukan yang terbaca sesuai dengan fungsi yang ada, maka akan menjal
 	upgradeInventori();
 	end;
 end else begin	{ masukan yang dapat diterima pada saat simulasi tidak berjalan}
-	if (strCommand = 'lihatStatistik') then
+	if (strCommand = 'start') then
+	begin
+	startSimulasi()	
+	end else if (strCommand = 'lihatStatistik') then
 	begin
 	lihatStatistik();
 	end else if (strCommand = 'lihatInventori') then
