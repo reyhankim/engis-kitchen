@@ -106,8 +106,11 @@ rewrite(Stat);
 i := 1;
 while (i<=10) do {Berhenti ketika i>10}
 	begin
+	if (dataSimulasi[i].nomor<>0) then
+	begin
 	temp := convInttoStr(dataSimulasi[i].nomor) + ' | ' + convInttoStr(dataSimulasi[i].dd) + '/'+ convInttoStr(dataSimulasi[i].mm)+'/'+ convInttoStr(dataSimulasi[i].yy) + ' | ' + convInttoStr(dataSimulasi[i].hh_hidup) + ' | '+ convInttoStr(dataSimulasi[i].energi) + ' | ' + convInttoStr(dataSimulasi[i].inven_cap) + ' | ' + convInttoStr(dataSimulasi[i].mentah_dibeli) + ' | '+ convInttoStr(dataSimulasi[i].bhn_olah_dibuat) + ' | ' + convInttoStr(dataSimulasi[i].bhn_olah_dijual) + ' | '+ convInttoStr(dataSimulasi[i].resep_dijual) + ' | '+ convInttoStr(dataSimulasi[i].sum_income)+ ' | ' + convInttoStr(dataSimulasi[i].sum_outcome) + ' | ' + convInttoStr(dataSimulasi[i].sum_uang) ; {Menyimpan input sebelum dimasukkan ke file eksternal "lisInvenOlahan.dat"}
 	write(Stat, temp);
+	end;
 	i :=i +1 ;
 	end;
 close(Stat); {i>10}
