@@ -24,16 +24,14 @@ strCommand : string;
 
 {ALGORITMA LOKAL}
 begin
-
 	strCommand := ''; {Definisikan sebuah string kosong sebagai tempat menyimpan masukan yang telah dibaca}
 	repeat
 		read(c);
-		if((c > ' ') and (ord(c) <> 13)) then
+		if((c > ' ') and (ord(c) <> 13) and (ord(c) <> 10)) then
 		begin
 			strCommand := strCommand + c;
 		end;
-	until ((c = ' ') or (ord(c) = 13)); {Berhenti membaca masukan ketika menemukan spasi atau baris baru}
-
+	until ((c = ' ') or (ord(c) = 10)); {Berhenti membaca masukan ketika menemukan spasi atau baris baru}
 if (simulasiRunning) then {simulasiRunning merupakan tipe boolean yang berubah kondisi ketika pengguna memasukkan masukan "start", berada di unit aksiSimulasi, dan bernilai true ketika simulasi berjalan}
 begin	{jika masukan yang terbaca sesuai dengan fungsi yang ada, maka akan menjalankan fungsi tersebut. Masukan ini berjalan saat simulasiRunning=true atau saat simulasi berjalan}
 	if (strCommand = 'stopSimulasi') then
@@ -78,6 +76,9 @@ begin	{jika masukan yang terbaca sesuai dengan fungsi yang ada, maka akan menjal
 	end else if (strCommand = 'upgradeInventori') then
 	begin
 	upgradeInventori();
+	end else
+	begin
+		writeln('Masukan salah, silakan ulangi');
 	end;
 end else begin	{ masukan yang dapat diterima pada saat simulasi tidak berjalan}
 	if (strCommand = 'lihatStatistik') then
@@ -101,6 +102,9 @@ end else begin	{ masukan yang dapat diterima pada saat simulasi tidak berjalan}
 	end else if(strCommand = 'start') then
 	begin
 		startSimulasi();
+	end else
+	begin
+		writeln('Masukan salah, silakan ulangi');
 	end;
 end;
 end;

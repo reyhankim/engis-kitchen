@@ -146,8 +146,7 @@ implementation
         end else
         begin
             write('Nama Bahan: ');
-            readln(namaBahan);
-            writeln(namaBahan);
+            readln(namaBahan);  
             bahanLocation := cariNamaBahan(tipe.arrBahanMentah, namaBahan);
             if(bahanLocation = -1) then //Bahan tidak ada di supermarket
             begin
@@ -155,9 +154,9 @@ implementation
             end else
             begin
                 bahanLocation += 1;
-                writeln(bahanLocation);
                 write('Kuantitas: ');
                 readln(kuantitas);
+                writeln(kuantitas);
                 totalHarga := kuantitas*tipe.arrBahanMentah[bahanLocation].harga;
                 invenSize := kuantitas + tipe.currentSimulasi.inven_Used;
                 if(totalHarga > tipe.currentSimulasi.sum_Uang) then //Uang tidak mencukupi
