@@ -1,7 +1,7 @@
 unit aksiresep;
 
 interface
-uses tipe;
+uses tipe,aksiSave;
 
 var
 temp : tipe.hasil_olah;
@@ -34,13 +34,28 @@ begin
 	begin
 	 for j:=1 to i do
 	 begin
-		if (tipe.arrResep[j].nama<tipe.arrResep[j+1].nama) then
+		if (tipe.arrResep[j].nama>tipe.arrResep[j+1].nama) then
 		begin
 			temp:=tipe.arrResep[j];
 			tipe.arrResep[j]:=tipe.arrResep[j+1];
 			tipe.arrResep[j+1]:=temp;
 		end;
 	 end;
+	end;
+	
+	for i:=1 to carijumlah do
+	begin
+		write(arrResep[i].nama);
+		write(' | ');
+		write(arrResep[i].harga);
+		write(' | ');
+		write(arrResep[i].n);
+		for j:=1 to arrResep[i].n do
+		begin
+			write(' | ');
+			write(arrResep[i].bahan[j]);
+		end;
+		writeln();
 	end;
 end;
 
@@ -62,12 +77,14 @@ begin
 				write(' | ');
 				write(tipe.arrResep[i].bahan[j]);
 			end;
+			writeln();
 			ketemu:=1;
 		end;
 	end;
 	if (ketemu=0) then
 	begin
 		writeln('Resep tidak ditemukan. Coba ulang.');
+		cariResep();
 	end;
 end;
 
@@ -90,6 +107,7 @@ begin
 	begin
 		readln(tipe.arrResep[i].bahan[j]);
 	end;
+	saveResep;
 end;
 
 end.
