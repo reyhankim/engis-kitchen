@@ -99,7 +99,6 @@ implementation
             tipe.arrBahanMentah[idx].harga := convStringToInt(parseRes.arr[2]);
             tipe.arrBahanMentah[idx].dur_exp := convStringToInt(parseRes.arr[3]);
             tipe.arrBahanMentah[idx].stock := convStringToInt(parseRes.arr[4]);
-            writeln(tipe.arrBahanMentah[idx].stock);
             idx += 1;
         end;
         close(fileInput);
