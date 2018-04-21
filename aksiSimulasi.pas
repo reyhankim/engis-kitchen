@@ -2,8 +2,17 @@ unit aksiSimulasi;
 
 interface
     procedure startSimulasi(); 
+    //Memulai simulasi 
+    //I.S: simulasiRunning bernilai false
+    //F.S: simulasiRunning bernilai true
     procedure stopSimulasi(); 
+    //Menghentikan simulasi dan memasukkan currentSimulasi ke data
+    //I.S: simulasiRunning bernilai true
+    //F.S: simulasiRunning bernilai false, statistik simulasi diperlihatkan
     procedure exit(); 
+    //Keluar dari program
+    //I.S: terminateProgram bernilai False
+    //F.S: Data inventori, resep, dan simulasi disimpan di dalam file external. terminateProgram bernilai true
 implementation
     uses tipe, aksiSave,aksiStatistik;
 

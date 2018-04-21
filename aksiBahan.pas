@@ -3,11 +3,29 @@ unit aksiBahan;
 interface
     uses tipe, inventori, uang, energi;
     procedure beliBahan(); 
+    //Membeli suatu bahan di supermarket
+    //I.S : arrInvMentah, arrBahanMentah, bahan yang diinginkan terdefinisi. Uang, energi, dan inventori yang tersedia cukup
+    //F.S : Bahan yang dibeli masuk ke dalam arrInvMentah
     procedure olahBahan();
+    //Membeli suatu bahan di supermarket
+    //I.S : arrInvMentah, arrBahanMentah, bahan yang diinginkan terdefinisi. Uang, energi, dan inventori yang tersedia cukup
+    //F.S : Bahan yang dibeli masuk ke dalam arrInvMentah
     procedure jualOlahan();
+    //Menjual bahan olahan
+    //I.S: arrInvOlahan dan arrBahanOlahan terdefinisi
+    //F.S: Bahan olahan yang akan dijual telah terjual, uang bertambah, energi berkurang.
     procedure jualResep ();
+    //Menjual resep
+    //I.S: arrInvOlahan dan arrResep terdefinisi
+    //F.S: Resep yang akan dijual telah terjual, uang bertambah, energi berkurang
     procedure hapusBahanKadaluarsa (); 
+    //Menghapus bahan yang sudah kadaluarsa
+    //I.S: arrInvMentah dan arrInvOlahan terdefinisi
+    //F.S: Semua bahan yang tanggal kadaluarsanya <= tanggal hari pada simulasi akan dihapus
     procedure restockBahan();
+    //Random bahan mentah yang tersedia di supermarket dengan kemungkinan sebesar 30%
+    //I.S: arrBahanMentah terdefinisi
+    //F.S: Masing-masing stock di arrBahanMentah menjadi 30
 
 implementation
     function cariNamaBahan(var arrListBahan: array of tipe.bahan_mentah; nama: string): integer;

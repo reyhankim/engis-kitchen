@@ -1,10 +1,22 @@
 unit inventori;
 
 interface
-	procedure useInventori(plusInventori: integer); 
+	procedure useInventori(plusInventori: integer);
+	//Menambah inventori yang terpakai pada simulasi sebesar plusInventori
+	//I.S: plusInventori bernilai bilangan bulat non-negatif
+	//F.S: Nilai currentSimulasi.inven_used bertambah sebesar plusInventori 
 	procedure freeInventori(minusInventori: integer); 
+	//Mengurangi inventori yang terpakai pada simulasi sebesar minusInventori
+	//I.S: minusInventori bernilai bilangan bulat non-negatif
+	//F.S: Nilai currentSimulasi.inven_used berkurang sebesar minusInventori
 	procedure lihatInventori();
+	//Melihat isi inventori bahan mentah dan olahan
+	//I.S: arrInvMentah dan arrInvOlahan terdefinisi
+	//F.S: Isi inventori bahan mentah dan olahan telah teroutput. arrInvMentah dan arrInvOlahan telah terurut
 	procedure upgradeInventori();
+	//Mengupgrade ruang inventori
+	//I.S: Uang yang dimiliki tidak kurang dari harga upgrade inventori
+	//F.S: Batas maksimal inventori bertambah sebesar 25, uang yang dimiliki berkurang sebesar harga_upgrade
 implementation
 	uses tipe,uang,sort;
 	procedure useInventori(plusInventori: integer); 

@@ -3,10 +3,26 @@ unit aksiLoad;
 interface
     uses tipe;
     procedure loadBahanMentah(); 
+    //Membaca file dari 'listBahanMentah.dat' dan memasukannya ke dalam array
+    //I.S: arrBahanMentah kosong
+    //F.S: arrBahanMentah terisi
     procedure loadBahanOlahan();
+    //Mengambil list bahan olahan dari file 'listBahanOlahan.dat'
+    //I.S: arrBahanOlahan kosong
+    //F.S: arrBahanOlahan terisi
     procedure loadResep(); 
+    //Mengambil list list resep dari 'resep.dat'
+    //I.S: arrResep kosong
+    //F.S: arrResep terisi  
     procedure loadInventori(); 
+    //Mengambil isi inventori bahan mentah dari 'listInvenMentah.dat' dan isi inventori
+    //bahan olahan dari 'listInvenOlahan.dat'
+    //I.S: arrInvMentah dan arrInvOlahan kosong
+    //F.S: arrInvMentah dan arrInvOlahan terisi
     procedure loadSimulasi();
+    //Mengambil data-data simulasi dari 'dataSimulasi.dat'
+    //I.S: array dataSimulasi kosong
+    //F.S: array dataSimulasi terisi
 implementation
     type //tipe data untuk mengambil hasil parsing dari suatu string menjadi array of string
         parseResult = record
