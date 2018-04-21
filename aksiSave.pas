@@ -41,7 +41,7 @@ i := 1;
 while (arrInvMentah[i].nama<>'') do {Berhenti ketika arrInvMentah[i] kosong}
 begin
 	temp := arrInvMentah[i].nama + ' | ' + convInttoStr(arrInvMentah[i].dd)+'/'+convInttoStr(arrInvMentah[i].mm)+'/'+convInttoStr(arrInvMentah[i].yy)+' | '+convInttoStr(arrInvMentah[i].jumlah); {Menyimpan input sebelum dimasukkan ke file eksternal "lisInvenMentah.dat"}
-	write(Mentah, temp);
+	writeln(Mentah, temp);
 	i := i +1;
 end;
 close(Mentah);
@@ -51,7 +51,7 @@ j := 1;
 while(arrInvOlahan[j].nama<>'') do {Berhenti ketika arrInvOlahan[i] kosong}
 begin
 	temp := arrInvOlahan[j].nama + ' | ' + convInttoStr(arrInvOlahan[j].dd)+'/'+convInttoStr(arrInvOlahan[j].mm)+'/'+convInttoStr(arrInvOlahan[j].yy)+' | ' + convInttoStr(arrInvOlahan[j].jumlah); {Menyimpan input sebelum dimasukkan ke file eksternal "lisInvenOlahan.dat"}
-	write(Olahan, temp);
+	writeln(Olahan, temp);
 	j := j +1;
 end;
 close(Olahan);
@@ -82,7 +82,7 @@ while (arrResep[i].nama <> '') do {Berhenti ketika arrResep[i] kosong}
 	begin
 	temp := temp + ' | ' + arrResep[i].bahan[j]; {Menyimpan input sebelum dimasukkan ke file eksternal "resep.dat", dengan pengulangan untuk menyimpan daftar bahan}
 	end;
-	write(resep,temp);
+	writeln(resep,temp);
 	i := i+1;
 	end;
 close(resep);
@@ -109,7 +109,7 @@ while (i<=10) do {Berhenti ketika i>10}
 	if (dataSimulasi[i].nomor<>0) then
 	begin
 	temp := convInttoStr(dataSimulasi[i].nomor) + ' | ' + convInttoStr(dataSimulasi[i].dd) + '/'+ convInttoStr(dataSimulasi[i].mm)+'/'+ convInttoStr(dataSimulasi[i].yy) + ' | ' + convInttoStr(dataSimulasi[i].hh_hidup) + ' | '+ convInttoStr(dataSimulasi[i].energi) + ' | ' + convInttoStr(dataSimulasi[i].inven_cap) + ' | ' + convInttoStr(dataSimulasi[i].mentah_dibeli) + ' | '+ convInttoStr(dataSimulasi[i].bhn_olah_dibuat) + ' | ' + convInttoStr(dataSimulasi[i].bhn_olah_dijual) + ' | '+ convInttoStr(dataSimulasi[i].resep_dijual) + ' | '+ convInttoStr(dataSimulasi[i].sum_income)+ ' | ' + convInttoStr(dataSimulasi[i].sum_outcome) + ' | ' + convInttoStr(dataSimulasi[i].sum_uang) ; {Menyimpan input sebelum dimasukkan ke file eksternal "lisInvenOlahan.dat"}
-	write(Stat, temp);
+	writeln(Stat, temp);
 	end;
 	i :=i +1 ;
 	end;
