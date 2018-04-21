@@ -1,6 +1,6 @@
 // HamdaniF
 // 4-9-2018
-// Lihat Statistik - rev2
+// Lihat Statistik - rev3
 
 unit lihatStatistik;
 
@@ -22,7 +22,7 @@ procedure lihatStatistik();
 
 //kamus lokal
 var
-	k,j,i: integer;
+	temp2,temp,space,k,j,i: integer;
 
 BEGIN
 	writeln('==Statistik==');
@@ -46,21 +46,74 @@ BEGIN
 		end;
 
 	
-	writeln('==Hasil Olahan==');
+
+	writeln('==========Hasil Olahan==========');{20}
 	writeln;
+	writeln('__________________________________________________');
 	k:=1;
-	writeln('|  Nama  ',' ','|','|  Harga  ',' ','|','|  Jumlah  ',' ','|','|  Bahan  ',' ','|');
-	while (arrBahanOlahan[k].nama<>'') do
+	writeln('|','        Nama        '{20},'|',' Harga '{7},'|','Jumlah'{5},'|','      Bahan       '{18},'|');
+	while(arrBahanOlahan[k].nama<>'') do
 		begin
-		write('|',arrBahanOlahan[k].nama,' ','|',arrBahanOlahan[k].harga,' ','|',arrBahanOlahan[k].n,' ','|');
-			j:=1;
-			while (arrBahanOlahan[i].bahan<>null) do
+		write('|');
+		space := 20 - length(arrBahanOlahan[k].nama);
+		write(arrBahanOlahan[k].nama);
+		for i:=1 to space do
+			begin
+				write(' ');
+			end;
+		
+		write('|');
+		temp := 0;
+		temp2 := arrBahanOlahan[k].harga;
+		while ( temp2 >10) do
+			begin
+				temp:=temp+1;
+				temp2 := temp2 div 10;
+			end;
+		write(arrBahanOlahan[k].harga);
+		for i:=1 to 7-temp do
+			begin
+				write(' ');
+			end;
+		
+		write('|');
+		temp := 0;
+		temp2 := arrBahanOlahan[k].n;
+		while ( temp2 >10) do
+			begin
+				temp:=temp+1;
+				temp2 := temp2 div 10;
+			end;
+		write(arrBahanOlahan[k].n);
+		for i:=1 to 5-temp do
+			begin
+				write(' ');
+			end;
+		
+		write('|');
+		write(arrBahanOlahan[k].bahan[1]);
+		space := 18 - length(arrBahanOlahan[k].bahan[1]);
+		for i:=1 to space do
+			begin
+				write(' ');
+			end;
+		write('|');
+		writeln;
+
+		j:=2;
+			while (arrBahanOlahan[k].bahan[j]<>null) do
 				begin
-					write(arrBahanOlahan[i].bahan[j],',');
+					space := 63 - length(arrBahanOlahan[k].bahan[j]);
+					write('|');
+					for i:=1 to space do
+						begin
+							write(' ');
+						end;
+					
+					write(arrBahanOlahan[k].bahan[j],'|');
+					j:=j+1
 				end;
-		writeln('|');
-		i:=i+1;
-		end;			
+	end;		
 END;
 
 end.
