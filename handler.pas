@@ -28,9 +28,12 @@ begin
 	strCommand := ''; {Definisikan sebuah string kosong sebagai tempat menyimpan masukan yang telah dibaca}
 	repeat
 		read(c);
-		strCommand := strCommand + c;
-	until ((c = ' ') or (c = '\n')); {Berhenti membaca masukan ketika menemukan spasi atau baris baru}
-	
+		if((c > ' ') and (ord(c) <> 13)) then
+		begin
+			strCommand := strCommand + c;
+		end;
+	until ((c = ' ') or (ord(c) = 13)); {Berhenti membaca masukan ketika menemukan spasi atau baris baru}
+
 if (simulasiRunning) then {simulasiRunning merupakan tipe boolean yang berubah kondisi ketika pengguna memasukkan masukan "start", berada di unit aksiSimulasi, dan bernilai true ketika simulasi berjalan}
 begin	{jika masukan yang terbaca sesuai dengan fungsi yang ada, maka akan menjalankan fungsi tersebut. Masukan ini berjalan saat simulasiRunning=true atau saat simulasi berjalan}
 	if (strCommand = 'stopSimulasi') then
@@ -77,10 +80,7 @@ begin	{jika masukan yang terbaca sesuai dengan fungsi yang ada, maka akan menjal
 	upgradeInventori();
 	end;
 end else begin	{ masukan yang dapat diterima pada saat simulasi tidak berjalan}
-	if (strCommand = 'start') then
-	begin
-	startSimulasi()	
-	end else if (strCommand = 'lihatStatistik') then
+	if (strCommand = 'lihatStatistik') then
 	begin
 	lihatStatistik();
 	end else if (strCommand = 'lihatInventori') then
@@ -98,6 +98,9 @@ end else begin	{ masukan yang dapat diterima pada saat simulasi tidak berjalan}
 	end else if (strCommand = 'upgradeInventori') then
 	begin
 	upgradeInventori();
+	end else if(strCommand = 'start') then
+	begin
+		startSimulasi();
 	end;
 end;
 end;

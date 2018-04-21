@@ -24,6 +24,7 @@ implementation
         val: Integer;
     begin
         readln(val);
+        writeln(val);
         if(tipe.simulasiRunning) then //Sudah ada simulasi yang berjalan
         begin
             writeln('Sudah ada simulasi yang berjalan');
@@ -32,6 +33,7 @@ implementation
             writeln('Masukan salah');
         end else  //Validasi berhasil
         begin
+            writeln('Simulasi ', val, ' berjalan');
             tipe.currentSimulasi := tipe.dataSimulasi[val];
             tipe.dataSimulasi[val].nomor := val;
             tipe.simulasiRunning := true;
@@ -48,6 +50,7 @@ implementation
             writeln('Tidak ada simulasi yang sedang berjalan');
         end else 
         begin
+            writeln('Simulasi ', tipe.simulasiRunning,' berhenti');
             tipe.simulasiRunning := false;
             tipe.dataSimulasi[tipe.currentSimulasi.nomor] := tipe.currentSimulasi;
         end;
@@ -59,6 +62,7 @@ implementation
     //I.S: terminateProgram bernilai False
     //F.S: Data inventori, resep, dan simulasi disimpan di dalam file external. terminateProgram bernilai true
     begin
+        writeln('Program berhenti');
         saveInventori();
         saveResep();
         saveSimulasi();
