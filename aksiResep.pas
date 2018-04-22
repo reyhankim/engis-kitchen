@@ -162,9 +162,6 @@ i,j : integer;
 ketemu : boolean;
 {ALGORITMA LOKAL}
 begin
-	writeln(jumlahresep);
-	writeln(jumlahbahanmentah);
-	writeln(jumlahbahanolahan);
 	i:=1;
 	while(tipe.arrResep[i].nama <>'') do	{Looping agar dimasukkan pada baris terakhir dari data resep}
 	begin
@@ -178,10 +175,10 @@ begin
 	readln(tipe.arrResep[i].n);
 	for j:=1 to tipe.arrResep[i].n do
 	begin
-		write('Bahan ');write(j);write(':');
 		ketemu:=false;
 		while(ketemu=false) do
 		begin
+		write('Bahan ');write(j);write(':');
 		readln(tipe.arrResep[i].bahan[j]);
 		for i:=1 to jumlahbahanmentah do
 		begin
