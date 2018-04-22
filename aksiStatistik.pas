@@ -2,7 +2,7 @@
 // 4-9-2018
 // Lihat Statistik - rev2
 
-unit lihatStatistik;
+unit aksiStatistik;
 
 interface
 
