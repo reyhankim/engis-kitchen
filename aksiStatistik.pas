@@ -7,7 +7,7 @@ unit aksiStatistik;
 interface
 
 uses
-	tipe;
+	tipe, sort, inventori;
 
 procedure lihatStatistik();
 {Menampilkan statistik informasi yang sedang dijalankan atau di-stopSimulasi. Buat selengkap dan serapi mungkin~ (bentuk tabel, blablabla) }
@@ -22,18 +22,19 @@ var
 BEGIN
 	writeln('==Statistik==');
 	writeln;
-	writeln('nomor simulasi:',currentSimulasi.nomor);
-	writeln('Today ',currentSimulasi.dd,'/',currentSimulasi.mm,'/',currentSimulasi.yy);
-	writeln('Hari ke-',currentSimulasi.hh_hidup);
-	writeln('Energi:',currentSimulasi.energi);
-	writeln('Kapasitas maksimum inventori:',currentSimulasi.inven_cap);
-	writeln('Total bahan mentah dibeli:',currentSimulasi.mentah_dibeli);
-	writeln('Total bahan olahan dibuat:',currentSimulasi.bhn_olah_dibuat);
-	writeln('Total bahan olahan dijual:',currentSimulasi.bhn_olah_dijual);
-	writeln('Total bahan resep dijual:',currentSimulasi.resep_dijual);
-	writeln('Total pemasukan:',currentSimulasi.sum_income);
-	writeln('Total pengeluaran:',currentSimulasi.sum_outcome);
-	writeln('Jumlah uang:','Rp ',currentSimulasi.sum_uang);
+	writeln('Nomor simulasi: ',currentSimulasi.nomor);
+	writeln('Tanggal ',currentSimulasi.dd,'/',currentSimulasi.mm,'/',currentSimulasi.yy);
+	writeln('Hari ke-',currentSimulasi.hh_hidup, ' (Jumlah hari akumulatif)');
+    writeln('Hari ke-',simulatedSessionDay, ' dari 10 hari batas maksimal sesi ini.');
+	writeln('Energi: ',currentSimulasi.energi);
+	writeln('Kapasitas maksimum inventori: ',currentSimulasi.inven_cap,' slot inventori');
+	writeln('Total bahan mentah dibeli: ',currentSimulasi.mentah_dibeli,' kali');
+	writeln('Total bahan olahan dibuat: ',currentSimulasi.bhn_olah_dibuat,' kali');
+	writeln('Total bahan olahan dijual: ',currentSimulasi.bhn_olah_dijual,' kali');
+	writeln('Total bahan resep dijual: ',currentSimulasi.resep_dijual,' kali');
+	writeln('Total pemasukan: ','Rp ',currentSimulasi.sum_income);
+	writeln('Total pengeluaran: ','Rp ',currentSimulasi.sum_outcome);
+	writeln('Jumlah uang: ','Rp ',currentSimulasi.sum_uang);
 	writeln();
 	writeln();
 	
@@ -41,7 +42,7 @@ BEGIN
 writeln('=====Inventory Mentah=====');
 writeln('______________________________________');
 writeln('|        Nama        |DD/MM/YY |Jumlah|');
-
+sortIsiInventori(arrInvMentah);
 i:=1;
 	while(arrInvMentah[i].nama<>'')do
 		begin
@@ -77,7 +78,7 @@ writeln();
 writeln('=====Inventory Olahan=====');
 writeln('______________________________________');
 writeln('|        Nama        |DD/MM/YY |Jumlah|');
-
+sortIsiInventori(arrInvOlahan);
 L:=1;
 	while(arrInvOlahan[L].nama<>'')do
 		begin

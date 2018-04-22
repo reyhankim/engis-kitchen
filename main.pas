@@ -17,8 +17,7 @@ begin
     loadInventori();
     writeln('loadInventori OK');
     terminateProgram := False; 
-    writeln('terminateProgram Initialized');
-    writeln('HINT: Input command "commandList" untuk menampilkan daftar perintah yang dapat diberikan.');
+    writeln('TIP: Input command "commandList" untuk menampilkan daftar perintah yang dapat diberikan.');
     while (not(terminateProgram)) do begin //jalankan program hingga exit()
         runUserInterface();
     end;

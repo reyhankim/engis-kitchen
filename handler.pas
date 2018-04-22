@@ -6,7 +6,6 @@ interface
     uses tipe,aksiChef,energi,uang,inventori,aksiStatistik,aksiSave,aksiSimulasi,aksiLoad,aksiResep,aksiBahan; 
 
     procedure runUserInterface();
-    procedure showCommand();
 
 implementation
 

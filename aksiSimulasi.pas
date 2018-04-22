@@ -36,6 +36,7 @@ implementation
             tipe.currentSimulasi := tipe.dataSimulasi[val];
             tipe.dataSimulasi[val].nomor := val;
             tipe.simulasiRunning := true;
+            tipe.simulatedSessionDay := 1;
         end;
     end;
 

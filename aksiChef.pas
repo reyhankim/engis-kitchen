@@ -41,7 +41,7 @@ Begin
 									todayEnergyPlus:=todayEnergyPlus + 3;
 									if (currentSimulasi.energi >10) then
 										currentSimulasi.energi := 10;
-									writeln('Kamu telah berasil makan');
+									writeln('Kamu telah berhasil makan');
 								end;
 					end;
 			end;
@@ -87,7 +87,7 @@ procedure tidur();
 //hh_hidup := 0 (inisiasi)
 //inisialisasi di program utama
 Begin
-	if (currentSimulasi.hh_hidup <10) then
+	if (simulatedSessionDay <10) then
 	begin
 		//refill energi
 		currentSimulasi.energi := 10;
@@ -134,11 +134,12 @@ Begin
 
 	//Penambahan hari
 	currentSimulasi.hh_hidup := currentSimulasi.hh_hidup + 1;
+    simulatedSessionDay := simulatedSessionDay + 1;
 	
 	//Hapus Bahan kadaluarsa saat tidur
 	hapusBahanKadaluarsa;
 	end
-else {currentSimulasi.hh_hidup : 10}
+else {simulatedSessionDay : 10}
 	//end game?
 	begin
 	stopSimulasi;

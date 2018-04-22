@@ -57,6 +57,7 @@ interface
         uang : longint;
         terminateProgram, simulasiRunning : boolean;
         todayIstirahatCount, todayMakanCount, todayEnergyPlus : integer;
+        simulatedSessionDay : integer;
 
 implementation
 
