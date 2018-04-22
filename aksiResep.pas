@@ -1,7 +1,7 @@
 unit aksiresep;
 
 interface
-uses tipe,aksiSave;
+uses tipe,aksiSave,aksiLoad,aksiBahan;
 
 var
 temp : tipe.hasil_olah; {variable untuk menampung data sementara yang sesuap dengan tipe hasil olahan}
@@ -9,11 +9,13 @@ temp : tipe.hasil_olah; {variable untuk menampung data sementara yang sesuap den
 procedure lihatResep();
 procedure cariResep();
 procedure tambahResep();
-function carijumlah():integer;
+function jumlahresep():integer;
+function jumlahbahanolahan():integer;
+function jumlahbahanmentah():integer;
 
 implementation
 
-function carijumlah():integer;
+function jumlahresep():integer;
 {Mencari jumlah buah Resep yang terdapat di dalam data Resep}
 
 {KAMUS LOKAL}
@@ -22,14 +24,50 @@ i: integer;
 
 {ALGORITMA LOKAL}
 begin
-	carijumlah:=0;
+	jumlahresep:=0;
 	i:=1;
 	while(not(tipe.arrResep[i].nama='')) do {looping berhenti ketika tidak menemukan nama resep di data}
 	begin
-		carijumlah:=carijumlah+1;
+		jumlahresep:=jumlahresep+1;
 		i:=i+1;
 	end;
 end;
+
+function jumlahbahanolahan():integer;
+{Mencari jumlah buah bahan olahan yang terdapat di dalam data bahan olahan}
+{KAMUS LOKAL}
+var
+i: integer;
+
+{ALGORITMA LOKAL}
+begin
+	jumlahbahanolahan:=0;
+	i:=1;
+	while(not(tipe.arrBahanOlahan[i].nama='')) do {looping berhenti ketika tidak menemukan nama Bahan Olahan di data}
+	begin
+		jumlahbahanolahan:=jumlahbahanolahan+1;
+		i:=i+1;
+	end;
+end;
+
+function jumlahbahanmentah():integer;
+{Mencari jumlah bahan mentah yang terdapat di dalam data bahan mentah}
+
+{KAMUS LOKAL}
+var
+i: integer;
+
+{ALGORITMA LOKAL}
+begin
+	jumlahbahanmentah:=0;
+	i:=1;
+	while(not(tipe.arrBahanMentah[i].nama='')) do {looping berhenti ketika tidak menemukan nama bahan mentah di data}
+	begin
+		jumlahbahanmentah:=jumlahbahanmentah+1;
+		i:=i+1;
+	end;
+end;
+
 
 procedure lihatResep();
 {Melihat daftar resep yang tersedia, termasuk semua daftar bahan penyusunnya.}
@@ -42,7 +80,7 @@ i,j: integer;
 
 {ALGORITMA LOKAL}
 begin
-	for i:= (carijumlah-1) downto 1 do {looping akan dilakukan dari jumlah resep sampai 1}
+	for i:= (jumlahresep-1) downto 1 do {looping akan dilakukan dari jumlah resep sampai 1}
 	begin
 	 for j:=1 to i do
 	 begin
@@ -55,7 +93,7 @@ begin
 	 end;
 	end;
 	
-	for i:=1 to carijumlah do		{menampilkan resep sesuai dengan spesifikasi resep yang diharapkan}
+	for i:=1 to jumlahresep do		{menampilkan resep sesuai dengan spesifikasi resep yang diharapkan}
 	begin
 		write(arrResep[i].nama);
 		write(' | ');
@@ -89,7 +127,7 @@ begin
 	ketemu:=0;
 	write('Tuliskan Resep yang ingin dicari: ');
 	readln(resep);
-	for i:=1 to cariJumlah do		{melakukan looping untuk mencari apakah resep ditemukan}
+	for i:=1 to jumlahresep do		{melakukan looping untuk mencari apakah resep ditemukan}
 	begin
 		if(tipe.arrResep[i].nama=resep) then
 		begin
@@ -121,8 +159,12 @@ desimal pada harga jual, dilakukan pembulatan ke atas (contoh: 1999.1 menjadi 20
 {KAMUS LOKAL}
 var
 i,j : integer;
+ketemu : boolean;
 {ALGORITMA LOKAL}
 begin
+	writeln(jumlahresep);
+	writeln(jumlahbahanmentah);
+	writeln(jumlahbahanolahan);
 	i:=1;
 	while(tipe.arrResep[i].nama <>'') do	{Looping agar dimasukkan pada baris terakhir dari data resep}
 	begin
@@ -136,7 +178,30 @@ begin
 	readln(tipe.arrResep[i].n);
 	for j:=1 to tipe.arrResep[i].n do
 	begin
+		write('Bahan ');write(j);write(':');
+		ketemu:=false;
+		while(ketemu=false) do
+		begin
 		readln(tipe.arrResep[i].bahan[j]);
+		for i:=1 to jumlahbahanmentah do
+		begin
+			if(tipe.arrBahanMentah[i].nama=tipe.arrResep[i].bahan[j]) then
+			begin
+				ketemu:=true;
+			end;
+		end;
+		for i:=1 to jumlahbahanolahan do
+		begin
+			if(tipe.arrBahanOlahan[i].nama=tipe.arrResep[i].bahan[j]) then
+			begin
+				ketemu:=true;
+			end;
+		end;
+		if(ketemu=false) then
+		begin
+			writeln('Bahan Tidak ditemukan. Masukkan Ulang Bahan');
+		end;
+		end;
 	end;
 	saveResep;		{Melakukan save pada data resep}
 end;
