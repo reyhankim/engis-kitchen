@@ -178,7 +178,8 @@ if (arrBahanOlahan[1].nama<>'') then
 	end
 else
 	writeln('----------------Bahan Olahan Kosong----------------');
-	end;		
+	end;
+writeln;
 END;
 END.
 
