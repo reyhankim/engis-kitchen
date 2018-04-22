@@ -228,7 +228,7 @@ implementation
                 begin
                     for i := 1 to tipe.arrBahanOlahan[bahanLocation].n do //mengurangi jumlah bahan pada inventori
                     begin
-                        arrInvMentah[cariNamaInventori(tipe.arrInvMentah,tipe.arrBahanOlahan[bahanLocation].bahan[i])].jumlah -= 1;
+                        tipe.arrInvMentah[1+cariNamaInventori(tipe.arrInvMentah,tipe.arrBahanOlahan[bahanLocation].bahan[i])].jumlah -= 1;
                         freeInventori(1);
                     end;     
                     if(tipe.currentSimulasi.inven_used = tipe.currentSimulasi.inven_cap) then //Inventori tidak mencukupi
