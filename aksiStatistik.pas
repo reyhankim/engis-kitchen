@@ -1,6 +1,6 @@
 // HamdaniF
 // 4-9-2018
-// Lihat Statistik - rev2
+// Lihat Statistik - final
 
 unit aksiStatistik;
 
@@ -37,142 +37,78 @@ BEGIN
 	writeln();
 	writeln();
 	
-	writeln('=======Bahan Mentah=======');
-	writeln;
-	i:=1;
-	writeln('_____________________________________________');
-	writeln('|        Nama        '{20},'|  Harga  '{7},'|Durasi expire'{13},'|');
-	if (arrBahanMentah[1].nama <> '') then
+
+writeln('=====Inventory Mentah=====');
+writeln('______________________________________');
+writeln('|        Nama        |DD/MM/YY |Jumlah|');
+
+i:=1;
+	while(arrInvMentah[i].nama<>'')do
 		begin
-			while(arrBahanMentah[i].nama<> '') do
+			space :=20-length(arrInvMentah[i].nama);
+			write('|',arrInvMentah[i].nama);
+			for j:=1 to space do
 				begin
-					space := 20 - length(arrBahanMentah[i].nama);
-					write('|',arrBahanMentah[i].nama);
-					for L:=1 to space do
-						begin
-							write(' ');
-						end;
+					write(' ');
+				end;
 			
-					write('|');
-					temp := 1;
-					temp2 := arrBahanMentah[i].harga;
-							while ( temp2 >10) do
-								begin
-									temp:=temp+1;
-									temp2 := temp2 div 10;
-								end;
-						write(arrBahanMentah[i].harga);
-						for L:=1 to 9-temp do
-							begin
-								write(' ');
-							end;
-
+			write('|',arrInvMentah[i].dd,'/',arrInvMentah[i].mm,'/',arrInvMentah[i].yy,'|');
 			
-		
-					write('|');
-					temp := 0;
-					temp2 := arrBahanMentah[i].dur_exp;
-					while ( temp2 >10) do
-						begin
-							temp:=temp+1;
-							temp2 := temp2 div 10;
-						end;
-					write(arrBahanMentah[i].dur_exp);
-					for L:=1 to 11-temp do
-						begin
-							write(' ');
-						end;
-		
-					write('|');
-					i:=i+1;
-					writeln;
-			end;
+			temp:=0;
+			temp2 := arrInvMentah[i].jumlah;
+			while (temp2>9) do
+				begin
+					temp:=temp+1;
+					temp2:=temp2 div 10;
+				end;
+			
+			write(arrInvMentah[i].jumlah);
+			for k:=1 to 5-temp do
+				begin
+					write(' ');
+				end;
+			writeln('|');
+			i:=i+1;	
+		end;
+writeln;		
+writeln();
+	
 
+writeln('=====Inventory Olahan=====');
+writeln('______________________________________');
+writeln('|        Nama        |DD/MM/YY |Jumlah|');
+
+L:=1;
+	while(arrInvOlahan[L].nama<>'')do
+		begin
+			space :=20-length(arrInvOlahan[L].nama);
+			write('|',arrInvOlahan[L].nama);
+			for j:=1 to space do
+				begin
+					write(' ');
+				end;
+			
+			write('|',arrInvOlahan[L].dd,'/',arrInvOlahan[L].mm,'/',arrInvOlahan[L].yy,'|');
+			
+			temp:=0;
+			temp2 := arrInvOlahan[L].jumlah;
+			while (temp2>9) do
+				begin
+					temp:=temp+1;
+					temp2:=temp2 div 10;
+				end;
+			
+			write(arrInvOlahan[L].jumlah);
+			for k:=1 to 5-temp do
+				begin
+					write(' ');
+				end;
+			writeln('|');
+			L:=L+1;	
+		end;
 writeln;
 
-	writeln('==========Hasil Olahan==========');{20}
-	writeln;
-	writeln('_______________________________________________________');
-	k:=1;
-	writeln('|','        Nama        '{20},'|',' Harga '{7},'|','Jumlah'{5},'|','      Bahan       '{18},'|');
-if (arrBahanOlahan[1].nama<>'') then
-	begin
-	while(arrBahanOlahan[k].nama<>'') do
-		begin
-		write('|');
-		space := 20 - length(arrBahanOlahan[k].nama);
-		write(arrBahanOlahan[k].nama);
-		for L:=1 to space do
-			begin
-				write(' ');
-			end;
-		
-		write('|');
-		temp := 1;
-		temp2 := arrBahanOlahan[k].harga;
-		if (arrBahanOlahan[k].harga <> 0) then
-			begin
-				while ( temp2 >10) do
-					begin
-						temp:=temp+1;
-						temp2 := temp2 div 10;
-					end;
-				write(arrBahanOlahan[k].harga);
-				for L:=1 to 7-temp do
-					begin
-						write(' ');
-					end;
-			end
-		else if (arrBahanOlahan[k].harga = 0) then
-			begin
-				write(arrBahanOlahan[k].harga,'      ');
-			end;
-		
-		write('|');
-		temp := 0;
-		temp2 := arrBahanOlahan[k].n;
-		while ( temp2 >10) do
-			begin
-				temp:=temp+1;
-				temp2 := temp2 div 10;
-			end;
-		write(arrBahanOlahan[k].n);
-		for L:=1 to 5-temp do
-			begin
-				write(' ');
-			end;
-		
-		space := 18 - length(arrBahanOlahan[k].bahan[1]);
-		write('|');
-		write(arrBahanOlahan[k].bahan[1]);
-		for i:=1 to space do
-			begin
-				write(' ');
-			end;
-		writeln('|');
-		
-		j:=2;
-			while (arrBahanOlahan[k].bahan[j]<>'') do
-				begin
-					space := 18 - length(arrBahanOlahan[k].bahan[j]);
-					write('|');
-					write('                    |       |      ','|',arrBahanOlahan[k].bahan[j]);
-					for i:=1 to space do
-						begin
-							write(' ');
-						end;
-					
-					write('|');
-					j:=j+1;
-					writeln;
-				end;
-		k:= k+1;
-		end;
-	end
-else
-	writeln('----------------Bahan Olahan Kosong----------------');
-	end;
-writeln;		
+
 END;
 END.
 
