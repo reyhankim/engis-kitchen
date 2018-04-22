@@ -56,7 +56,7 @@ interface
         currentSimulasi : data;
         uang : longint;
         terminateProgram, simulasiRunning : boolean;
-        todayIstirahatCount, todayMakanCount : integer;
+        todayIstirahatCount, todayMakanCount, todayEnergyPlus : integer;
 
 implementation
 
