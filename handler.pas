@@ -175,6 +175,7 @@ implementation
         showCommand();
         end else if (strCommand = 'exit') then
         begin
+        exit();
         terminateProgram := True;
         end else 
         begin
