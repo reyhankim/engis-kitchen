@@ -56,24 +56,17 @@ BEGIN
 					write('|');
 					temp := 1;
 					temp2 := arrBahanMentah[i].harga;
-					if (arrBahanMentah[i].harga <> 0) then
-						begin
 							while ( temp2 >10) do
 								begin
 									temp:=temp+1;
 									temp2 := temp2 div 10;
 								end;
 						write(arrBahanMentah[i].harga);
-						if(i>1) then write(' ');
-						for L:=1 to 8-temp do
+						for L:=1 to 9-temp do
 							begin
 								write(' ');
 							end;
-						end
-					else if (arrBahanMentah[i].harga = 0) then
-						begin
-							write(arrBahanMentah[i].harga,'      ');
-						end;
+
 			
 		
 					write('|');
@@ -179,7 +172,7 @@ if (arrBahanOlahan[1].nama<>'') then
 else
 	writeln('----------------Bahan Olahan Kosong----------------');
 	end;
-writeln;
+writeln;		
 END;
 END.
 
