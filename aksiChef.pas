@@ -29,18 +29,26 @@ procedure makan();
 Begin
 	//pengecekan kondisi makan, jika sudah 3 kali fitur tidak akan dapat digunakan
 	writeln('Kamu menyiapkan makananmu!');
-	case todayMakanCount of
-	3 		:writeln('Makan hari ini sudah 3 kali. Karena takut dietmu gagal, kamu ga jadi makan, deh!'); 
-	0,1,2  	:case currentSimulasi.energi of
-				0		:writeln('Energimu habis, hanya dapat tidur!');
-				1..10	:begin
-							todayMakanCount := todayMakanCount + 1 ;
-							currentSimulasi.energi := currentSimulasi.energi + 3;
-							if (currentSimulasi.energi >10) then
-								currentSimulasi.energi := 10;
-						 end;
+	if (todayEnergyPlus <8) then
+		begin
+			case todayMakanCount of
+			3 		:writeln('Makan hari ini sudah 3 kali. Karena takut dietmu gagal, kamu ga jadi makan, deh!'); 
+			0,1,2  	:case currentSimulasi.energi of
+						0		:writeln('Energimu habis, hanya dapat tidur!');
+						1..10	:begin
+									todayMakanCount := todayMakanCount + 1 ;
+									currentSimulasi.energi := currentSimulasi.energi + 3;
+									todayEnergyPlus:=todayEnergyPlus + 3;
+									if (currentSimulasi.energi >10) then
+										currentSimulasi.energi := 10;
+								end;
+					end;
 			end;
-	end;	
+		end
+	else
+		begin
+			writeln('menambahkan energi maksimal 10 per hari, makan gagal');
+		end;
 end;
 
 procedure istirahat();
@@ -48,19 +56,27 @@ procedure istirahat();
 //inisialisasi di program utama
 Begin
 	//pengecekan kondisi istirahat, jika sudah 6 kali fitur tidak akan dapat digunakan
-	writeln('Kamu akan istirahat');
-	case todayIstirahatCount of
-	6 		:writeln('Istirahat hari ini sudah 6 kali. "Mageran banget sih aku," katamu. Kamu pun mengurungkan niatmu.'); 
-	0..5  	:case currentSimulasi.energi of
-				0		:writeln('Energimu habis, hanya dapat tidur!');
-				1..10	:begin
-							todayIstirahatCount := todayIstirahatCount + 1 ;
-							currentSimulasi.energi := currentSimulasi.energi + 1;
-							if (currentSimulasi.energi >10) then
-								currentSimulasi.energi := 10;
-						 end;
-			 end;
-	end;
+	if (todayEnergyPlus <10) then
+		begin	
+			writeln('Kamu akan istirahat');
+			case todayIstirahatCount of
+			6 		:writeln('Istirahat hari ini sudah 6 kali. "Mageran banget sih aku," katamu. Kamu pun mengurungkan niatmu.'); 
+			0..5  	:case currentSimulasi.energi of
+						0		:writeln('Energimu habis, hanya dapat tidur!');
+						1..10	:begin
+									todayIstirahatCount := todayIstirahatCount + 1 ;
+									currentSimulasi.energi := currentSimulasi.energi + 1;
+									todayEnergyPlus := todayEnergyPlus+1;
+									if (currentSimulasi.energi >10) then
+										currentSimulasi.energi := 10;
+								end;
+					end;
+			end;
+		end
+	else
+		begin
+			writeln('menambahkan energi maksimal 10 tiap hari, istirahat gagal');
+		end;	
 end;
 
 procedure tidur(); 
@@ -112,6 +128,7 @@ Begin
 	//reset inisiasi
 	todayIstirahatCount := 0;
 	todayMakanCount		:= 0;
+	todayEnergyPlus		:= 0;
 
 	//Penambahan hari
 	currentSimulasi.hh_hidup := currentSimulasi.hh_hidup + 1;
