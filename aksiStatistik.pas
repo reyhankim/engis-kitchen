@@ -22,7 +22,7 @@ procedure lihatStatistik();
 
 //kamus lokal
 var
-	temp2,temp,space,k,j,i: integer;
+	temp2,temp,space,L,k,j,i: integer;
 
 BEGIN
 	writeln('==Statistik==');
@@ -34,13 +34,50 @@ BEGIN
 	writeln();
 	writeln();
 	
-	writeln('==Bahan Mentah==');
+	writeln('=======Bahan Mentah=======');
 	writeln;
 	i:=1;
-	writeln('|  Nama  ',' ','|','|  Harga  ',' ','|','|  Durasi expire  ',' ','|');
+	writeln('________________________________________');
+	writeln('|        Nama        '{20},'|  Harga  '{7},'|Durasi expire'{13},'|');
 	while(arrBahanMentah[i].nama<> '') do
 		begin
 		write('|',arrBahanMentah[i].nama,' ','|',arrBahanMentah[i].harga,' ','|',arrBahanMentah[i].dur_exp,' ','|');
+		space := 20 - length(arrBahanMentah[i].nama);
+		write('|',arrBahanMentah[i].nama);
+		for L:=1 to space do
+			begin
+				write(' ');
+			end;
+		
+		write('|');
+		temp := 0;
+		temp2 := arrBahanMentah[i].harga;
+		while ( temp2 >10) do
+			begin
+				temp:=temp+1;
+				temp2 := temp2 div 10;
+			end;
+		write(arrBahanOlahan[i].harga);
+		for L:=1 to 7-temp do
+			begin
+				write(' ');
+			end;
+		
+		write('|');
+		temp := 0;
+		temp2 := arrBahanMentah[i].dur_exp;
+		while ( temp2 >10) do
+			begin
+				temp:=temp+1;
+				temp2 := temp2 div 10;
+			end;
+		write(arrBahanMentah[i].dur_exp);
+		for L:=1 to 13-temp do
+			begin
+				write(' ');
+			end;
+		
+		write('|');
 		i:=i+1;
 		writeln;
 		end;
@@ -72,7 +109,7 @@ BEGIN
 		write('|');
 		space := 20 - length(arrBahanOlahan[k].nama);
 		write(arrBahanOlahan[k].nama);
-		for i:=1 to space do
+		for L:=1 to space do
 			begin
 				write(' ');
 			end;
@@ -86,7 +123,7 @@ BEGIN
 				temp2 := temp2 div 10;
 			end;
 		write(arrBahanOlahan[k].harga);
-		for i:=1 to 7-temp do
+		for L:=1 to 7-temp do
 			begin
 				write(' ');
 			end;
@@ -100,7 +137,7 @@ BEGIN
 				temp2 := temp2 div 10;
 			end;
 		write(arrBahanOlahan[k].n);
-		for i:=1 to 5-temp do
+		for L:=1 to 5-temp do
 			begin
 				write(' ');
 			end;
@@ -108,7 +145,7 @@ BEGIN
 		write('|');
 		write(arrBahanOlahan[k].bahan[1]);
 		space := 18 - length(arrBahanOlahan[k].bahan[1]);
-		for i:=1 to space do
+		for L:=1 to space do
 			begin
 				write(' ');
 			end;
