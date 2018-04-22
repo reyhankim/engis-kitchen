@@ -24,8 +24,8 @@ BEGIN
 	writeln;
 	writeln('nomor simulasi:',currentSimulasi.nomor);
 	writeln('Today ',currentSimulasi.dd,'/',currentSimulasi.mm,'/',currentSimulasi.yy);
-	writeln('Hari ke -',currentSimulasi.hh_hidup);
-	writeln('Energi     :',currentSimulasi.energi);
+	writeln('Hari ke-',currentSimulasi.hh_hidup);
+	writeln('Energi:',currentSimulasi.energi);
 	writeln('Kapasitas maksimum inventori:',currentSimulasi.inven_cap);
 	writeln('Total bahan mentah dibeli:',currentSimulasi.mentah_dibeli);
 	writeln('Total bahan olahan dibuat:',currentSimulasi.bhn_olah_dibuat);
