@@ -217,7 +217,6 @@ implementation
             begin
                 bahanLocation += 1;
                 bahanCukup := true;
-                writeln(tipe.arrBahanOlahan[bahanLocation+1].n);
                 for i := 1 to tipe.arrBahanOlahan[bahanLocation].n do
                 begin
                     if(cariNamaInventori(tipe.arrInvMentah,tipe.arrBahanOlahan[bahanLocation].bahan[i]) = -1) then //bahan tidak terdapat di inventori
