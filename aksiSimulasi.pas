@@ -24,7 +24,6 @@ implementation
         val: Integer;
     begin
         readln(val);
-        writeln(val);
         if(tipe.simulasiRunning) then //Sudah ada simulasi yang berjalan
         begin
             writeln('Sudah ada simulasi yang berjalan');
