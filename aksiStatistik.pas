@@ -87,6 +87,7 @@ BEGIN
 	else
 		write('----------------Bahan kosong----------------');
 
+writeln;
 
 	writeln('==========Hasil Olahan==========');{20}
 	writeln;
@@ -133,17 +134,7 @@ if (arrBahanOlahan[1].nama<>'') then
 				write(' ');
 			end;
 		
-		write('|');
-		write(arrBahanOlahan[k].bahan[1]);
-		space := 18 - length(arrBahanOlahan[k].bahan[1]);
-		for L:=1 to space do
-			begin
-				write(' ');
-			end;
-		write('|');
-		writeln;
-
-		j:=2;
+		j:=1;
 			while (arrBahanOlahan[k].bahan[j]<>null) do
 				begin
 					space := 63 - length(arrBahanOlahan[k].bahan[j]);
@@ -154,7 +145,8 @@ if (arrBahanOlahan[1].nama<>'') then
 						end;
 					
 					write(arrBahanOlahan[k].bahan[j],'|');
-					j:=j+1
+					j:=j+1;
+					writeln;
 				end;
 		k:= k+1;
 		end;
