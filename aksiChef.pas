@@ -10,9 +10,7 @@ uses
 	tipe,aksiSimulasi,aksiBahan;
 
 var
-	todayMakanCount : integer;
 	currentSimulasi : data;
-	todayIstirahatCount : integer;
 
 procedure makan ();
 {menambah energi sebanyak 3 buah, namun maksimum dalam 1 hari hanya boleh 3x makan}
@@ -33,9 +31,10 @@ procedure makan();
 
 Begin
 	//pengecekan kondisi makan, jika sudah 3 kali fitur tidak akan dapat digunakan
+	writeln('Kamu menyiapkan makananmu!');
 	case todayMakanCount of
 	3 		:writeln('Makan hari ini sudah 3 kali, aksi diurungkan!'); 
-	1,2  	:case currentSimulasi.energi of
+	0,1,2  	:case currentSimulasi.energi of
 				0		:writeln('Energimu habis, hanya dapat tidur!');
 				1..10	:begin
 							todayMakanCount := todayMakanCount + 1 ;
@@ -52,9 +51,10 @@ procedure istirahat();
 //inisialisasi di program utama
 Begin
 	//pengecekan kondisi istirahat, jika sudah 6 kali fitur tidak akan dapat digunakan
+	writeln('Kamu akan istirahat');
 	case todayIstirahatCount of
 	6 		:writeln('Istirahat hari ini sudah 6 kali, aksi diurungkan!'); 
-	1..5  	:case currentSimulasi.energi of
+	0..5  	:case currentSimulasi.energi of
 				0		:writeln('Energimu habis, hanya dapat tidur!');
 				1..10	:begin
 							todayIstirahatCount := todayIstirahatCount + 1 ;
@@ -72,6 +72,7 @@ procedure tidur();
 //hh_hidup := 1 (inisiasi)
 //inisialisasi di program utama
 Begin
+	writeln('Kamu akan tidur');
 	if (currentSimulasi.hh_hidup <11) then
 	begin
 		//refill energi
