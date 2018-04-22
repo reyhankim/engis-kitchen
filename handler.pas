@@ -126,7 +126,7 @@ implementation
         istirahat();
         end else if (strCommand = 'tidur') then
         begin
-        istirahat();
+        tidur();
         end else if (strCommand = 'lihatStatistik') then
         begin
         lihatStatistik();
