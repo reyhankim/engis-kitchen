@@ -158,15 +158,21 @@ desimal pada harga jual, dilakukan pembulatan ke atas (contoh: 1999.1 menjadi 20
 
 {KAMUS LOKAL}
 var
-i,j : integer;
-ketemu : boolean;
+i,j,k : integer;
+ketemu,berhasil : boolean;
+totalharga : longint;
+minharga: real;
 {ALGORITMA LOKAL}
 begin
+	berhasil:=false;
 	i:=1;
 	while(tipe.arrResep[i].nama <>'') do	{Looping agar dimasukkan pada baris terakhir dari data resep}
 	begin
 		i:=i+1;
-	end;	
+	end;
+	while(not(berhasil)) do
+	begin	
+	totalharga:=0;
 	write('Nama Resep: ');			{Pemasukkan resep pada data resep}
 	readln(tipe.arrResep[i].nama);
 	write('Harga Jual: ');
@@ -180,18 +186,20 @@ begin
 		begin
 		write('Bahan ');write(j);write(':');
 		readln(tipe.arrResep[i].bahan[j]);
-		for i:=1 to jumlahbahanmentah do
+		for k:=1 to jumlahbahanmentah do
 		begin
-			if(tipe.arrBahanMentah[i].nama=tipe.arrResep[i].bahan[j]) then
+			if(tipe.arrBahanMentah[k].nama=tipe.arrResep[i].bahan[j]) then
 			begin
 				ketemu:=true;
+				totalharga:=totalharga+tipe.arrBahanMentah[k].harga;
 			end;
 		end;
-		for i:=1 to jumlahbahanolahan do
+		for k:=1 to jumlahbahanolahan do
 		begin
-			if(tipe.arrBahanOlahan[i].nama=tipe.arrResep[i].bahan[j]) then
+			if(tipe.arrBahanOlahan[k].nama=tipe.arrResep[i].bahan[j]) then
 			begin
 				ketemu:=true;
+				totalharga:=totalharga+tipe.arrBahanOlahan[k].harga;
 			end;
 		end;
 		if(ketemu=false) then
@@ -200,7 +208,17 @@ begin
 		end;
 		end;
 	end;
-	saveResep;		{Melakukan save pada data resep}
+	minharga:=1.125*totalharga;
+	if(tipe.arrResep[i].harga<minharga) then
+	begin
+		writeln('Harga jual Resep kurang mahal(Harus 1.125 harga total bahan). Isi Ulang!.');
+	end
+	else
+	begin
+		berhasil:=true;
+		saveResep;
+	end;
+	end;
 end;
 
 end.
