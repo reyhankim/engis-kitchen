@@ -84,10 +84,10 @@ end;
 procedure tidur(); 
 
 //start day 1
-//hh_hidup := 1 (inisiasi)
+//hh_hidup := 0 (inisiasi)
 //inisialisasi di program utama
 Begin
-	if (currentSimulasi.hh_hidup <11) then
+	if (currentSimulasi.hh_hidup <10) then
 	begin
 		//refill energi
 		currentSimulasi.energi := 10;
@@ -142,6 +142,7 @@ else {currentSimulasi.hh_hidup : 10}
 	//end game?
 	begin
 	stopSimulasi;
+	writeln('Chef sudah pensiun karena terlalu stres mengerjakan program');
 	end;
 end;
 
