@@ -83,6 +83,7 @@ implementation
 		begin
 			tipe.currentSimulasi.inven_cap += 25;
 			kurangUang(harga_upgrade);
+            writeln('Inventori telah di-upgrade. Kapasitas inventori Anda sekarang adalah ', tipe.currentSimulasi.inven_cap, ' slot inventori.');
 		end else
 		begin
 			writeln('Uang tidak cukup');

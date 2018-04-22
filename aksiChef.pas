@@ -9,9 +9,6 @@ interface
 uses
 	tipe,aksiSimulasi,aksiBahan;
 
-var
-	currentSimulasi : data;
-
 procedure makan ();
 {menambah energi sebanyak 3 buah, namun maksimum dalam 1 hari hanya boleh 3x makan}
 
@@ -23,7 +20,7 @@ procedure tidur();
 tidur. Jika Chef tidur, terjadi pergantian hari. Jika terjadi pergantian hari, secara otomatis bahan-bahan
 mentah dan olahan yang kadaluarsa pada hari yang baru, dihapus dari inventori.}
 
-Implementation
+implementation
 
 procedure makan();
 //todayMakanCount= 0
@@ -33,7 +30,7 @@ Begin
 	//pengecekan kondisi makan, jika sudah 3 kali fitur tidak akan dapat digunakan
 	writeln('Kamu menyiapkan makananmu!');
 	case todayMakanCount of
-	3 		:writeln('Makan hari ini sudah 3 kali, aksi diurungkan!'); 
+	3 		:writeln('Makan hari ini sudah 3 kali. Karena takut dietmu gagal, kamu ga jadi makan, deh!'); 
 	0,1,2  	:case currentSimulasi.energi of
 				0		:writeln('Energimu habis, hanya dapat tidur!');
 				1..10	:begin
@@ -53,7 +50,7 @@ Begin
 	//pengecekan kondisi istirahat, jika sudah 6 kali fitur tidak akan dapat digunakan
 	writeln('Kamu akan istirahat');
 	case todayIstirahatCount of
-	6 		:writeln('Istirahat hari ini sudah 6 kali, aksi diurungkan!'); 
+	6 		:writeln('Istirahat hari ini sudah 6 kali. "Mageran banget sih aku," katamu. Kamu pun mengurungkan niatmu.'); 
 	0..5  	:case currentSimulasi.energi of
 				0		:writeln('Energimu habis, hanya dapat tidur!');
 				1..10	:begin
@@ -72,7 +69,7 @@ procedure tidur();
 //hh_hidup := 1 (inisiasi)
 //inisialisasi di program utama
 Begin
-	writeln('Kamu akan tidur');
+	writeln('Kamu akan tidur. "Hal menarik apa yang akan terjadi esok, ya?"');
 	if (currentSimulasi.hh_hidup <11) then
 	begin
 		//refill energi

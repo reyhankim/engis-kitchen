@@ -5,6 +5,7 @@ uses tipe, handler, aksiLoad;
     
 begin
     //load seluruh data dari file eksternal
+    writeln('=====================================ENGIS KITCHEN=====================================');
     loadSimulasi();
     writeln('loadSimulasi OK');
     loadBahanMentah();
@@ -17,23 +18,8 @@ begin
     writeln('loadInventori OK');
     terminateProgram := False; 
     writeln('terminateProgram Initialized');
-    writeln('Pilihan Command:');
-    writeln('start (angka)');
-    writeln('beliBahan');
-    writeln('olahBahan');
-    writeln('jualOlahan');
-    writeln('jualResep');
-    writeln('makan');
-    writeln('istirahat');
-    writeln('tidur');
-    writeln('lihatStatistik');
-    writeln('lihatInventori');
-    writeln('lihatResep');
-    writeln('cariResep');
-    writeln('tambahResep');
-    writeln('upgradeInventori');
+    writeln('HINT: Input command "commandList" untuk menampilkan daftar perintah yang dapat diberikan.');
     while (not(terminateProgram)) do begin //jalankan program hingga exit()
         runUserInterface();
-        writeln('runUserInterface running');
     end;
 end.

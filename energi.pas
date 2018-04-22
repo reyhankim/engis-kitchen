@@ -2,8 +2,6 @@ unit energi;
 
 interface
 uses tipe;
-var
-  currentSimulasi :data;
 
 procedure tambahEnergi(plusEnergi:integer);
 procedure kurangEnergi(minusEnergi:integer);
