@@ -41,6 +41,7 @@ Begin
 									todayEnergyPlus:=todayEnergyPlus + 3;
 									if (currentSimulasi.energi >10) then
 										currentSimulasi.energi := 10;
+									writeln('Kamu telah berasil makan');
 								end;
 					end;
 			end;
@@ -69,6 +70,7 @@ Begin
 									todayEnergyPlus := todayEnergyPlus+1;
 									if (currentSimulasi.energi >10) then
 										currentSimulasi.energi := 10;
+									writeln('Kamu telah berasil istirahat');
 								end;
 					end;
 			end;
@@ -85,12 +87,12 @@ procedure tidur();
 //hh_hidup := 1 (inisiasi)
 //inisialisasi di program utama
 Begin
-	writeln('Kamu akan tidur. "Hal menarik apa yang akan terjadi esok, ya?"');
 	if (currentSimulasi.hh_hidup <11) then
 	begin
 		//refill energi
-		currentSimulasi.energi := currentSimulasi.energi + 10;
-	
+		currentSimulasi.energi := 10;
+		writeln('Kamu akan tidur');
+		
 		//perubahan hari
 		case currentSimulasi.mm of
 		1,3,5,7,8,10,12 :begin
