@@ -130,7 +130,11 @@ if (arrBahanOlahan[1].nama<>'') then
 			end;
 		
 		j:=1;
+<<<<<<< HEAD
 			while (arrBahanOlahan[k].bahan[j]<>'') do
+=======
+			while (arrBahanOlahan[k].bahan[j]<>null) do
+>>>>>>> 6e6a2d10a9ef11ef2885bebf5f16353f375bf290
 				begin
 					space := 63 - length(arrBahanOlahan[k].bahan[j]);
 					write('|');
@@ -149,4 +153,9 @@ if (arrBahanOlahan[1].nama<>'') then
 else
 	writeln('----------------Bahan Olahan Kosong----------------');
 	end;		
+<<<<<<< HEAD
 END.
+=======
+END.
+
+>>>>>>> 6e6a2d10a9ef11ef2885bebf5f16353f375bf290
