@@ -356,16 +356,16 @@ implementation
                         if(cariNamaInventori(tipe.arrInvMentah,tipe.arrResep[resepLocation].bahan[i]) <> -1) then //Mencari bahan di bahan mentah
                         begin
                             tipe.arrInvMentah[1+cariNamaInventori(tipe.arrInvMentah,tipe.arrResep[resepLocation].bahan[i])].jumlah -= 1;
-                            if(tipe.arrInvMentah[1+cariNamaInventori(tipe.arrInvMentah,tipe.arrResep[bahanLocation].bahan[i])].jumlah = 0) then
+                            if(tipe.arrInvMentah[1+cariNamaInventori(tipe.arrInvMentah,tipe.arrResep[resepLocation].bahan[i])].jumlah = 0) then
                             begin
-                                deleteInventori(cariNamaInventori(tipe.arrInvMentah,tipe.arrResep[bahanLocation].bahan[i]), arrInvMentah);
+                                deleteInventori(cariNamaInventori(tipe.arrInvMentah,tipe.arrResep[resepLocation].bahan[i]), arrInvMentah);
                             end;
                         end else //Mencari bahan di bahan olahan
                         begin
                             tipe.arrInvOlahan[1+cariNamaInventori(tipe.arrInvOlahan,tipe.arrResep[resepLocation].bahan[i])].jumlah -= 1;
-                            if(tipe.arrInvOlahan[1+cariNamaInventori(tipe.arrInvOlahan,tipe.arrResep[bahanLocation].bahan[i])].jumlah = 0) then
+                            if(tipe.arrInvOlahan[1+cariNamaInventori(tipe.arrInvOlahan,tipe.arrResep[resepLocation].bahan[i])].jumlah = 0) then
                             begin
-                                deleteInventori(cariNamaInventori(tipe.arrInvOlahan,tipe.arrResep[bahanLocation].bahan[i]), arrInvOlahan);
+                                deleteInventori(cariNamaInventori(tipe.arrInvOlahan,tipe.arrResep[resepLocation].bahan[i]), arrInvOlahan);
                             end;
                         end;
                     end;
