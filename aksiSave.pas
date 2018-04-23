@@ -11,9 +11,9 @@ procedure saveSimulasi();
 
 implementation
 
-function convInttoStr (X:integer) : string;
+function convInttoStr (X:longint) : string;
 {Mengubah tipe integer menjadi string}
-{I.S. : masukan X yang berupa integer
+{I.S. : masukan X yang berupa longint
 * F.S. : keluaran yang berupa string}
 
 
