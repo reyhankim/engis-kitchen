@@ -1,6 +1,24 @@
+
 // file main
 program main;
-uses handler, aksiLoad;
-
-type // deklarasi tipe data bentukan. Pada unit, untuk menggunakan tipe data bentukan ini, gunakan main.<nama_tipe_data_bentukan>
+uses tipe, handler, aksiLoad;
     
+begin
+    //load seluruh data dari file eksternal
+    writeln('=====================================ENGIS KITCHEN=====================================');
+    loadSimulasi();
+    writeln('loadSimulasi OK');
+    loadBahanMentah();
+    writeln('loadBahanMentah OK');
+    loadBahanOlahan();
+    writeln('loadBahanOlahan OK');
+    loadResep();
+    writeln('loadresep OK');
+    loadInventori();
+    writeln('loadInventori OK');
+    terminateProgram := False; 
+    writeln('TIP: Input command "commandList" untuk menampilkan daftar perintah yang dapat diberikan.');
+    while (not(terminateProgram)) do begin //jalankan program hingga exit()
+        runUserInterface();
+    end;
+end.
